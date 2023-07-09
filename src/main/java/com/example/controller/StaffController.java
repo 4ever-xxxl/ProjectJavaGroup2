@@ -6,7 +6,6 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.example.common.Result;
 import com.example.controller.Request.StaffPageRequest;
 import com.example.controller.Response.StaffResponse;
-import com.example.entity.MyFunction;
 import com.example.entity.Staff;
 import com.example.service.IStaffService;
 import com.github.pagehelper.PageHelper;
@@ -67,8 +66,7 @@ public class StaffController {
         List<Staff> staffs=staffService.searchCompanyStaff(staffPageRequest);
         PageInfo<Staff> pageInfo=new PageInfo<>(staffs);
         List<Staff> staff=pageInfo.getList();
-        Map<String, List<Map<String, Object>>> j=new MyFunction().ReadJSON("Staff");
-        StaffResponse staffResponse =new StaffResponse("staff",staff,j);
+        StaffResponse staffResponse =new StaffResponse("staff",staff);
         staffResponse.setTotal(pageInfo.getTotal());
         return Result.success(staffResponse);
     }
