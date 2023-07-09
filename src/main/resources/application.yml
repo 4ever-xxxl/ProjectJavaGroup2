@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/残保金数据库?serverTimezone=GMT%2b8&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/残保金数据库?serverTimezone=GMT%2b8&useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
     username: root
-    password: rootadmin
+    password: 123456
 mybatis:
   mapper-locations: classpath:mapper/*.xml #sql的位置
   configuration:
