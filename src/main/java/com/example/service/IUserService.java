@@ -2,10 +2,10 @@ package com.example.service;
 
 import com.example.controller.Request.LoginRequest;
 import com.example.controller.dto.LoginDTO;
-import com.example.entity.Admin;
+import com.example.entity.User;
 
-public interface IAdminService {
+public interface IUserService {
     String getPasswd(String Usrname);
     LoginDTO Login(LoginRequest loginRequest);
-    Admin getByUsrName(String name);
+    User getByUsrName(String name);
 }

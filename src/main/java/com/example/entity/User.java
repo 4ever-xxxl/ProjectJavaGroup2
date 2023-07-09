@@ -1,7 +1,7 @@
 package com.example.entity;
 
 
-public class Admin {
+public class User {
 
   private long usrId;
   private String usrName;
