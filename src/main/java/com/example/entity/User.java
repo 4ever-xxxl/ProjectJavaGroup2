@@ -6,7 +6,7 @@ public class User {
   private long usrId;
   private String usrName;
   private String usrPasswd;
-  private long usrClass;
+  private String usrClass;
   private long usrPermission;
 
 
@@ -37,11 +37,11 @@ public class User {
   }
 
 
-  public long getUsrClass() {
+  public String getUsrClass() {
     return usrClass;
   }
 
-  public void setUsrClass(long usrClass) {
+  public void setUsrClass(String usrClass) {
     this.usrClass = usrClass;
   }
 
