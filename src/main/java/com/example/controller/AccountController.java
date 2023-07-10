@@ -55,7 +55,7 @@ public class AccountController {
     public Result searchAccount(@RequestBody AccountPageRequest accountPageRequest){
         PageHelper.startPage(accountPageRequest.getPageNum(),accountPageRequest.getPageSize());
 
-        //Èç¹û´«¹ıÀ´id²»Îª¿Õ£¬ÄÇÃ´°´idÕÒ
+        //å¦‚æœä¼ è¿‡æ¥idä¸ä¸ºç©ºï¼Œé‚£ä¹ˆæŒ‰idæ‰¾
         if(accountPageRequest.getAid() != null){
             Account account = new Account();
             account.setAid(accountPageRequest.getAid());
@@ -67,7 +67,7 @@ public class AccountController {
             }
         }
 
-        //¸ù¾İ¿¨ºÅ¡¢Óà¶î¡¢×î½ü¸üĞÂÊ±¼ä²éÕÒ
+        //æ ¹æ®å¡å·ã€ä½™é¢ã€æœ€è¿‘æ›´æ–°æ—¶é—´æŸ¥æ‰¾
         QueryWrapper<Account> queryWrapper=new QueryWrapper<>();
         queryWrapper.like(accountPageRequest.getAbankcard()!=null,"abankcard",accountPageRequest.getAbankcard())
                 .eq(accountPageRequest.getAbalance()!=null,"abalance",accountPageRequest.getAbalance())
@@ -77,7 +77,7 @@ public class AccountController {
 
         List<Account> accounts=accountDao.selectList(queryWrapper);
 
-        //Éú³ÉĞÂµÄ·ÖÒ³ĞÅÏ¢
+        //ç”Ÿæˆæ–°çš„åˆ†é¡µä¿¡æ¯
         PageInfo<Account> pageInfo=new PageInfo<>(accounts);
         List<Account> account=pageInfo.getList();
         return Result.success(account);
