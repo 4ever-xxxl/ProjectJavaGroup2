@@ -51,11 +51,11 @@ public class AccountController {
         }
     }
 
-    @PostMapping("/searchAccount")
+    @PostMapping("/searchAccount    ")
     public Result searchAccount(@RequestBody AccountPageRequest accountPageRequest){
         PageHelper.startPage(accountPageRequest.getPageNum(),accountPageRequest.getPageSize());
 
-        //å¦‚æœä¼ è¿‡æ¥idä¸ä¸ºç©ºï¼Œé‚£ä¹ˆæŒ‰idæ‰¾
+        //Èç¹û´«¹ıÀ´id²»Îª¿Õ£¬ÄÇÃ´°´idÕÒ
         if(accountPageRequest.getAid() != null){
             Account account = new Account();
             account.setAid(accountPageRequest.getAid());
@@ -67,7 +67,7 @@ public class AccountController {
             }
         }
 
-        //æ ¹æ®å¡å·ã€ä½™é¢ã€æœ€è¿‘æ›´æ–°æ—¶é—´æŸ¥æ‰¾
+        //¸ù¾İ¿¨ºÅ¡¢Óà¶î¡¢×î½ü¸üĞÂÊ±¼ä²éÕÒ
         QueryWrapper<Account> queryWrapper=new QueryWrapper<>();
         queryWrapper.like(accountPageRequest.getAbankcard()!=null,"abankcard",accountPageRequest.getAbankcard())
                 .eq(accountPageRequest.getAbalance()!=null,"abalance",accountPageRequest.getAbalance())
@@ -77,7 +77,7 @@ public class AccountController {
 
         List<Account> accounts=accountDao.selectList(queryWrapper);
 
-        //ç”Ÿæˆæ–°çš„åˆ†é¡µä¿¡æ¯
+        //Éú³ÉĞÂµÄ·ÖÒ³ĞÅÏ¢
         PageInfo<Account> pageInfo=new PageInfo<>(accounts);
         List<Account> account=pageInfo.getList();
         return Result.success(account);

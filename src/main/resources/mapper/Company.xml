@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.CompanyDao">
+
+
+    <select id="getCompanyById" resultType="com.example.entity.Company">
+        select * from company where cID =#{cID};
+    </select>
+
+    <select id="getCompanyByName" resultType="com.example.entity.Company">
+        select * from company where cName like #{cName};
+    </select>
+
+    <select id="getAllCompany" resultType="com.example.entity.Company">
+        select * from company;
+    </select>
+    <select id="searchCompany" resultType="com.example.entity.Company">
+        SELECT *
+        FROM company
+        WHERE 1=1
+       <!-- <if test="name != null and name != ''">
+            AND cName like concat('%', #{cName}, '%')
+        </if>
+        <if test="maxSalary != 0">
+            AND cAddress like concat('%', #{cAddress}, '%')
+        </if>
+        <if test="disabled != null">
+            AND cRegion like concat('%', #{cRegion}, '%')
+        </if>-->
+    </select>
+
+    <update id="updateCompany">
+        UPDATE company
+        SET cName = #{cName},
+            cAddress = #{cAddress},
+            cSocialCreditCode = #{cSocialCreditCode},
+            cRegion = #{cRegion}
+        WHERE cID = #{cID}
+    </update>
+
+    <delete id="deleteCompanyById">
+        delete from company where cID=#{cID}
+    </delete>
+
+    <insert id="addCompany">
+        insert into company (cID, cName, cAddress, cRegion,cSocialCreditCode)
+            value (#{cID}, #{cName},#{cAddress},#{cRegion},#{cSocialCreditCode})
+    </insert>
+</mapper>

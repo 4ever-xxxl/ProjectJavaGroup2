@@ -23,6 +23,12 @@ public class Result {
         return result;
     }
 
+    public static Result success(Integer msg) {
+        Result result = new Result();
+        result.setCode(SUCCESS_CODE);
+        result.setMsg(msg.toString());
+        return result;
+    }
     public static Result error(String msg) {
         Result result = new Result();
         result.setCode(ERROR_CODE);
