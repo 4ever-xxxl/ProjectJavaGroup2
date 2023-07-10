@@ -3,10 +3,8 @@ package com.example.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.common.Result;
 import com.example.controller.Request.AccountPageRequest;
-import com.example.controller.Response.AccountResponse;
 import com.example.dao.AccountDao;
 import com.example.entity.Account;
-import com.example.entity.Staff;
 import com.example.service.Imp.AccountService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -79,12 +77,7 @@ public class AccountController {
         List<Account> accounts=accountDao.selectList(queryWrapper);
 
         //生成新的分页信息
-        PageInfo<Account> pageInfo=new PageInfo<>(accounts);
-        List<Account> account=pageInfo.getList();
-        AccountResponse accountResponse=new AccountResponse();
-        accountResponse.setTotal(pageInfo.getTotal());
-        accountResponse.setTableData(account);
-        return Result.success(accountResponse);
+        return Result.success(new PageInfo<>(accounts));
     }
 
     @PutMapping("/updateAccount")
