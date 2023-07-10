@@ -3,6 +3,7 @@ package com.example.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.common.Result;
 import com.example.controller.Request.AccountPageRequest;
+import com.example.controller.Response.AccountResponse;
 import com.example.dao.AccountDao;
 import com.example.entity.Account;
 import com.example.entity.Staff;
@@ -51,7 +52,7 @@ public class AccountController {
         }
     }
 
-    @PostMapping("/searchAccount    ")
+    @PostMapping("/searchAccount")
     public Result searchAccount(@RequestBody AccountPageRequest accountPageRequest){
         PageHelper.startPage(accountPageRequest.getPageNum(),accountPageRequest.getPageSize());
 
@@ -80,7 +81,10 @@ public class AccountController {
         //生成新的分页信息
         PageInfo<Account> pageInfo=new PageInfo<>(accounts);
         List<Account> account=pageInfo.getList();
-        return Result.success(account);
+        AccountResponse accountResponse=new AccountResponse();
+        accountResponse.setTotal(pageInfo.getTotal());
+        accountResponse.setTableData(account);
+        return Result.success(accountResponse);
     }
 
     @PutMapping("/updateAccount")
