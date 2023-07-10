@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.dao.ExpensebillDao">
+    <select id="getExpensebillByEbId" resultType="com.example.entity.Expensebill">
+        select * from expensebill where ebID =#{ebID};
+    </select>
+
+    <select id="getExpensebillByEbfId" resultType="com.example.entity.Expensebill">
+        select * from expensebill where ebFinancialID=#{ebFinancialID};
+    </select>
+
+
+    <select id="getExpensebillByEbaId" resultType="com.example.entity.Expensebill">
+        select * from expensebill where ebAccountID =#{ebAccountID};
+    </select>
+
+
+    <select id="getAllExpensebill" resultType="com.example.entity.Expensebill">
+        select * from expensebill;
+
+    </select>
+    <select id="searchExpensebill" resultType="com.example.entity.Expensebill">
+        SELECT *
+        FROM expensebill
+        WHERE 1=1
+         <if test="ebObject != null and ebObject != ''">
+             AND ebObject like concat('%', #{ebObject}, '%')
+         </if>
+         <if test="maxAmount != 0">
+             AND ebAmount &lt; #{maxAmount}
+         </if>
+         <if test="minAmount != 0">
+            AND ebAmount &gt; #{minAmount}
+         </if>
+         <if test="maxDate != 0">
+            AND ebTime &lt; #{maxDate}
+         </if>
+         <if test="minDate != 0">
+            AND ebTime &gt; #{minDate}
+         </if>
+    </select>
+
+    <update id="updateExpensebill">
+        UPDATE expensebill
+        SET ebAccountID = #{ebAccountID},
+        ebAmount = #{ebAmount},
+        ebFinancialID = #{ebFinancialID},
+        ebObject= #{ebObject},
+        ebTime=#{ebTime}
+        WHERE ebID = #{ebID}
+    </update>
+
+    <delete id="deleteExpensebillById">
+        delete from expensebill where ebID=#{ebID}
+    </delete>
+
+    <insert id="addExpensebill">
+        insert into expensebill (ebID, ebObject, ebTime, ebFinancialID,ebAmount,ebAccountID)
+        value (#{ebID}, #{ebObject},#{ebTime},#{ebFinancialID},#{ebAmount},#{ebAccountID})
+    </insert>
+</mapper>
