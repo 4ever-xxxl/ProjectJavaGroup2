@@ -10,8 +10,4 @@ import java.util.List;
 @Service
 public class AccountService extends ServiceImpl<AccountDao, Account>
         implements IAccountService {
-
-
-    public void insert() {
-    }
 }
