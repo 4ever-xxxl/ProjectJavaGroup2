@@ -5,7 +5,6 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.example.common.Result;
 import com.example.controller.Request.StaffPageRequest;
-import com.example.controller.Response.StaffResponse;
 import com.example.entity.Staff;
 import com.example.service.IStaffService;
 import com.github.pagehelper.PageHelper;
@@ -27,6 +26,7 @@ public class StaffController {
     @GetMapping("/getAllCompanyStaff")
     public Result getAllCompanyStaff()
     {
+        System.out.println("成功staff");
         return Result.success(staffService.list());
     }
     @GetMapping("/hello")
@@ -64,11 +64,11 @@ public class StaffController {
     {
         PageHelper.startPage(staffPageRequest.getPageNum(),staffPageRequest.getPageSize());
         List<Staff> staffs=staffService.searchCompanyStaff(staffPageRequest);
+
+        //生成新的分页信息
         PageInfo<Staff> pageInfo=new PageInfo<>(staffs);
         List<Staff> staff=pageInfo.getList();
-        StaffResponse staffResponse =new StaffResponse("staff",staff);
-        staffResponse.setTotal(pageInfo.getTotal());
-        return Result.success(staffResponse);
+        return Result.success(staff);
     }
 
     @PostMapping("importUnitEmployees")

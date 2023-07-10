@@ -5,38 +5,40 @@
 <mapper namespace="com.example.dao.StaffDao">
 
     <select id="list" resultType="com.example.entity.Staff">
-        select * from staff;
+        select * from staff
     </select>
-
     <select id="getCompanyStaff" resultType="com.example.entity.Staff">
         select * from staff where sID =#{staffId} and sCompanyID=#{companyId};
     </select>
 
     <select id="searchCompanyStaff" resultType="com.example.entity.Staff">
-        SELECT *
-        FROM staff
-        WHERE 1=1
+        select *
+        from staff
+        where 1=1
         <if test="name != null and name != ''">
-            AND sName like concat('%', #{ name }, '%')
+            and sName like concat('%', #{ name }, '%')
         </if>
         <if test="maxSalary != 0">
-            AND sSalary &lt;= #{maxSalary}
+            and sSalary &lt;= #{maxSalary}
         </if>
         <if test="minSalary != 0">
-            AND sSalary &gt;= #{minSalary}
+            and sSalary &gt;= #{minSalary}
         </if>
         <if test="disabled != null">
-            AND sDisabled = #{disabled}
+            and sDisabled = #{disabled}
+        </if>
+        <if test="companyId != 0">
+            and sCompanyId = #{companyId}
         </if>
         <if test="address != null and address != ''">
-            AND sAddress LIKE CONCAT('%', #{address}, '%')
+            and sAddress like CONCAT('%', #{address}, '%')
         </if>
     </select>
 
 
     <update id="updateCompanyStaff">
-        UPDATE staff
-        SET sName = #{sName},
+        update staff
+        set sName = #{sName},
             sSex = #{sSex},
             sIdNum = #{sIdNum},
             sPhone = #{sPhone},
@@ -46,7 +48,7 @@
             sPosition = #{sPosition},
             sHireDate = #{sHireDate},
             sSalary = #{sSalary}
-        WHERE sID = #{sId} AND sCompanyId = #{sCompanyId}
+        where sID = #{sId} and sCompanyId = #{sCompanyId}
     </update>
 
     <delete id="deleteCompanyStaff">
