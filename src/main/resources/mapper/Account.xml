@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.AccountDao">
+
+    <resultMap id="BaseResultMap" type="com.example.entity.Account">
+            <id property="aid" column="aID" jdbcType="BIGINT"/>
+            <result property="abankcard" column="aBankCard" jdbcType="VARCHAR"/>
+            <result property="abalance" column="aBalance" jdbcType="DECIMAL"/>
+            <result property="alastupdate" column="aLastUpdate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        aID,aBankCard,aBalance,
+        aLastUpdate
+    </sql>
+</mapper>
