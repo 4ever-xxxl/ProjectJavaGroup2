@@ -2,6 +2,7 @@ package com.example.service.Imp;
 
 import cn.hutool.crypto.SecureUtil;
 import com.example.controller.Request.LoginRequest;
+import com.example.controller.Request.UserPageRequest;
 import com.example.controller.dto.LoginDTO;
 import com.example.dao.UserDao;
 import com.example.entity.User;
@@ -12,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -31,7 +34,28 @@ public class UserService implements IUserService {
     {
         return userDao.getByUsrName(name);
     }
-
+    @Override
+    public void addUser(User user){
+        System.out.println(user.getUsrPasswd()+user.getUsrClass());
+        userDao.addUser(user);
+    }
+    @Override
+    public void deleteUser(long userId){
+        userDao.deleteUser(userId);
+    }
+    @Override
+    public List<User> getAllUser(){
+        return userDao.getAllUser();
+    }
+    @Override
+    public void updateUser(User user){
+        userDao.updateUser(user);
+    }
+    @Override
+    public List<User> searchUser(UserPageRequest userPageRequest)
+    {
+        return userDao.searchUser(userPageRequest);
+    }
     @Override
     public LoginDTO Login(LoginRequest request) {
         System.out.println("UserService测试");
