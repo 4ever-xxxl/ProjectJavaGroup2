@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.WithheldbillDao">
+
+    <resultMap id="BaseResultMap" type="com.example.entity.Withheldbill">
+            <id property="wbid" column="wbID" jdbcType="BIGINT"/>
+            <result property="wbfinancialid" column="wbFinancialID" jdbcType="BIGINT"/>
+            <result property="wbaccountid" column="wbAccountID" jdbcType="BIGINT"/>
+            <result property="wbamount" column="wbAmount" jdbcType="DECIMAL"/>
+            <result property="wbtime" column="wbTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        wbID,wbFinancialID,wbAccountID,
+        wbAmount,wbTime
+    </sql>
+</mapper>
