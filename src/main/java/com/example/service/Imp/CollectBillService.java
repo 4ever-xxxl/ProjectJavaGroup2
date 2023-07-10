@@ -9,5 +9,4 @@ import org.springframework.stereotype.Service;
 @Service
 public class CollectBillService extends ServiceImpl<CollectBillDao, CollectBill>
         implements ICollectBillService {
-
 }
