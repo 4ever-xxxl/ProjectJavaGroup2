@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.CollectBillDao">
+
+    <resultMap id="BaseResultMap" type="com.example.entity.CollectBill">
+            <id property="cbid" column="cbID" jdbcType="BIGINT"/>
+            <result property="cbaccountid" column="cbAccountID" jdbcType="BIGINT"/>
+            <result property="cbcompanyid" column="cbCompanyID" jdbcType="BIGINT"/>
+            <result property="cbdue" column="cbDue" jdbcType="DECIMAL"/>
+            <result property="cbrelief" column="cbRelief" jdbcType="DECIMAL"/>
+            <result property="cbduedate" column="cbDueDate" jdbcType="DATE"/>
+            <result property="cbdelaydate" column="cbDelayDate" jdbcType="DATE"/>
+            <result property="cbstatement" column="cbStatement" jdbcType="VARCHAR"/>
+            <result property="cbstatetime" column="cbStateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        cbID,cbAccountID,cbCompanyID,
+        cbDue,cbRelief,cbDueDate,
+        cbDelayDate,cbStatement,cbStateTime
+    </sql>
+</mapper>
