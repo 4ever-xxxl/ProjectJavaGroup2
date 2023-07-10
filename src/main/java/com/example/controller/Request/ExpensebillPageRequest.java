@@ -11,9 +11,9 @@ public class ExpensebillPageRequest extends BaseRequest{
     @JsonProperty("ebObject")
     private String ebObject;
     @JsonProperty("maxAmount")
-    public double maxAmount;
+    private double maxAmount;
     @JsonProperty("minAmount")
-    public double minAmount;
+    private double minAmount;
     @JsonProperty("maxDate")
     public Date maxDate;
     @JsonProperty("minDate")

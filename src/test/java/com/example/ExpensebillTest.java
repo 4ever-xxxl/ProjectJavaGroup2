@@ -94,13 +94,18 @@ public class ExpensebillTest {
             System.out.println(expensebill);
         }
     }
-
+   /*
+     要使用此测试方法，需将StaffPageRequest中的相关属性访问权限更改为public
     @Test
     public void searchExpensebill(){
         ExpensebillPageRequest expensebillPageRequest=new ExpensebillPageRequest();
-        //expensebillPageRequest.minAmount=2000;
-        //expensebillPageRequest.maxAmount=10000;
+        expensebillPageRequest.minDate=new Date(100,Calendar.JULY,7,15,0,0);
+        expensebillPageRequest.maxDate=new Date(123,Calendar.JULY,7,15,0,0);
         List<Expensebill> expensebills=expensebilldao.searchExpensebill(expensebillPageRequest);
-        System.out.println(expensebills);
+        for (Expensebill expensebill :
+                expensebilldao.searchExpensebill(expensebillPageRequest)) {
+            System.out.println(expensebill);
+        }
     }
+    */
 }

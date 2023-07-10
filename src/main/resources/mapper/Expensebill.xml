@@ -27,24 +27,27 @@
         SELECT *
         FROM expensebill
         WHERE 1=1
-         <if test="ebObject != null and ebObject != ''">
-             AND ebObject like concat('%', #{ebObject}, '%')
-         </if>
-         <if test="maxAmount != 0">
-             AND ebAmount &lt; #{maxAmount}
-         </if>
-         <if test="minAmount != 0">
-            AND ebAmount &gt; #{minAmount}
-         </if>
-         <if test="maxDate != 0">
-            AND ebTime &lt; #{maxDate}
-         </if>
-         <if test="minDate != 0">
-            AND ebTime &gt; #{minDate}
-         </if>
+        <if test="ebObject != null and ebObject != ''">
+            AND ebObject like concat('%', #{ebObject}, '%')
+        </if>
+        <if test="maxAmount != 0">
+            AND ebAmount &lt;= #{maxAmount}
+        </if>
+        <if test="minAmount != 0">
+           AND ebAmount &gt;= #{minAmount}
+        </if>
+        <if test="maxDate != null">
+           AND ebTime &lt;= #{maxDate}
+        </if>
+        <if test="minDate != null">
+           AND ebTime &gt;= #{minDate}
+        </if>
     </select>
 
     <update id="updateExpensebill">
+        <!--UPDATE account
+        SET aBalance=(select aBalance+#{ebAmount} FROM account WHERE aID=#{ebAccountID})
+        WHERE aID=#{ebAccountID};-->
         UPDATE expensebill
         SET ebAccountID = #{ebAccountID},
         ebAmount = #{ebAmount},
@@ -52,6 +55,7 @@
         ebObject= #{ebObject},
         ebTime=#{ebTime}
         WHERE ebID = #{ebID}
+
     </update>
 
     <delete id="deleteExpensebillById">
