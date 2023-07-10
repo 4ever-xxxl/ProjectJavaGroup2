@@ -27,6 +27,7 @@ public class StaffController {
     @GetMapping("/getAllCompanyStaff")
     public Result getAllCompanyStaff()
     {
+        System.out.println("成功staff");
         return Result.success(staffService.list());
     }
     @GetMapping("/hello")

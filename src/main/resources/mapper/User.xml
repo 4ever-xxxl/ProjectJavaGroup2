@@ -10,4 +10,48 @@
     <select id="getByUsrName" resultType="com.example.entity.User">
         select * from user where usrName=#{usrName}
     </select>
+
+    <select id="getAllUser" resultType="com.example.entity.User">
+        select * from user
+    </select>
+    <select id="searchUser" resultType="com.example.entity.User">
+        select *
+        from user
+        where 1=1
+        <if test="username != null and username != ''">
+            and userName like concat('%', #{ username }, '%')
+        </if>
+        <if test="userpermission != 0">
+            and usrPermission = #{userpermission}
+        </if>
+        <if test="userclass != null and userclass != ''">
+            and usrClass like CONCAT('%', #{userclass}, '%')
+        </if>
+    </select>
+
+    <insert id="addUser">
+        insert into user (usrID,usrName,usrPasswd,usrClass,usrPermission)
+            value (#{usrId},#{usrName},#{usrPasswd},#{usrClass},#{usrPermission})
+    </insert>
+    <delete id="deleteUser">
+        delete from user where usrID=#{userId}
+    </delete>
+    <update id="updateUser">
+        update user set
+        usrID=usrID,
+        <if test="usrName != null and usrName != ''">
+            usrName=#{usrName},
+        </if>
+        <if test="usrClass != null and usrClass != ''">
+            usrName=#{usrName},
+        </if>
+        <if test="usrPasswd != null and usrPasswd != ''">
+            usrPasswd=#{usrPasswd},
+        </if>
+        <if test="usrPermission != 0">
+            usrPermission=#{usrPermission},
+        </if>
+        usrID=usrID
+        where usrID=#{usrId}
+    </update>
 </mapper>
