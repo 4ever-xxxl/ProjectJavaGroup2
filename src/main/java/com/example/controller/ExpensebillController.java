@@ -2,7 +2,6 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.controller.Request.ExpensebillPageRequest;
-import com.example.controller.Response.ExpensebillResponse;
 import com.example.dao.ExpensebillDao;
 import com.example.entity.Expensebill;
 import com.example.service.Imp.ExpensebillService;
@@ -64,10 +63,7 @@ public class ExpensebillController {
     {
         PageHelper.startPage(expensebillpagerequest.getPageNum(),expensebillpagerequest.getPageSize());
         List<Expensebill> companies=expensebillservice.searchExpensebill(expensebillpagerequest);
-        PageInfo<Expensebill> pageInfo=new PageInfo<>(companies);
-        List<Expensebill> expensebill=pageInfo.getList();
-        ExpensebillResponse expensebillresponse =new ExpensebillResponse("expensebill",expensebill);
-        expensebillresponse.setTotal(pageInfo.getTotal());
-        return Result.success(expensebillresponse);
+
+        return Result.success(new PageInfo<>(companies));
     }
 }

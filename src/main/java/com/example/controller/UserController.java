@@ -57,9 +57,7 @@ public class UserController {
     public Result searchUser(@RequestBody UserPageRequest userPageRequest){
         PageHelper.startPage(userPageRequest.getPageNum(),userPageRequest.getPageSize());
         List<User> users=userService.searchUser(userPageRequest);
-        PageInfo<User> pageInfo=new PageInfo<>(users);
-        List<User> user=pageInfo.getList();
-        return Result.success(user);
+        return Result.success(new PageInfo<>(users));
     }
 
 
