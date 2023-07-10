@@ -3,7 +3,6 @@ package com.example.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.common.Result;
 import com.example.controller.Request.AccountPageRequest;
-import com.example.controller.Response.StaffResponse;
 import com.example.dao.AccountDao;
 import com.example.entity.Account;
 import com.example.entity.Staff;
@@ -70,19 +69,18 @@ public class AccountController {
 
         //根据卡号、余额、最近更新时间查找
         QueryWrapper<Account> queryWrapper=new QueryWrapper<>();
-        queryWrapper.like();
+        queryWrapper.like(accountPageRequest.getAbankcard()!=null,"abankcard",accountPageRequest.getAbankcard())
+                .eq(accountPageRequest.getAbalance()!=null,"abalance",accountPageRequest.getAbalance())
+                .le(accountPageRequest.getMax_alastupdate()!=null,"alastupdate",accountPageRequest.getMax_alastupdate())
+                .ge(accountPageRequest.getMin_alastupdate()!=null,"alastupdate",accountPageRequest.getMin_alastupdate());
 
 
-        List<Staff> staffs=staffService.searchCompanyStaff(staffPageRequest);
+        List<Account> accounts=accountDao.selectList(queryWrapper);
 
         //生成新的分页信息
-        PageInfo<Staff> pageInfo=new PageInfo<>(staffs);
-        List<Staff> staff=pageInfo.getList();
-        return Result.success(staff);
-
-
-
-
+        PageInfo<Account> pageInfo=new PageInfo<>(accounts);
+        List<Account> account=pageInfo.getList();
+        return Result.success(account);
     }
 
     @PutMapping("/updateAccount")
