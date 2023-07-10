@@ -7,6 +7,7 @@
     <select id="list" resultType="com.example.entity.Staff">
         select * from staff;
     </select>
+
     <select id="getCompanyStaff" resultType="com.example.entity.Staff">
         select * from staff where sID =#{staffId} and sCompanyID=#{companyId};
     </select>

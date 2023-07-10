@@ -16,7 +16,11 @@
     <select id="getAllCompany" resultType="com.example.entity.Company">
         select * from company;
     </select>
-
+    <select id="searchCompany" resultType="com.example.entity.Company">
+        SELECT *
+        FROM staff
+        WHERE 1=1
+    </select>
 
     <update id="updateCompany">
         UPDATE company

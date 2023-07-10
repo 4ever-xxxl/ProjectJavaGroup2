@@ -1,13 +1,16 @@
 package com.example.service.Imp;
 
 import com.example.common.Result;
+import com.example.controller.Request.CompanyPageRequest;
 import com.example.dao.CompanyDao;
 import com.example.entity.Company;
+
 import com.example.service.ICompanyService;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class CompanyService implements ICompanyService {
@@ -45,5 +48,10 @@ public class CompanyService implements ICompanyService {
         }catch (Exception e){
             return Result.error("删除失败！\n"+e);
         }
+    }
+
+    @Override
+    public List<Company> searchCompany(CompanyPageRequest companypagerequest){
+        return companydao.searchCompany(companypagerequest);
     }
 }

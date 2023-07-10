@@ -1,4 +1,5 @@
 package com.example.dao;
+import com.example.controller.Request.CompanyPageRequest;
 import com.example.entity.Company;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface CompanyDao {
 
     Integer updateCompany(Company company);
 
+    List<Company> searchCompany(CompanyPageRequest companypagerequest);
 }

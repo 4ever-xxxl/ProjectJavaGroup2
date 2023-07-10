@@ -28,7 +28,7 @@ public class AccountController {
         return Result.success();
     }
 
-    @GetMapping("/searchAccount")
+    @GetMapping("/searchAccount/{accountID}")
     public Result searchAccount(@PathVariable long accountID){
         return Result.success(accountService.getById(accountID));
     }
