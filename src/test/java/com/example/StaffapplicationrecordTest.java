@@ -1,7 +1,6 @@
 package com.example;
 
 import com.example.controller.StaffapplicationrecordController;
-import com.example.dao.StaffapplicationrecordDao;
 import com.example.entity.Staffapplicationrecord;
 import com.example.service.Imp.StaffapplicationrecordService;
 import org.junit.jupiter.api.Test;
