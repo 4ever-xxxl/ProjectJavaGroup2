@@ -71,6 +71,7 @@ public class WithheldbillController {
         } else if (withheldbillPageRequest.getMax_wbamount() != null) {
             queryWrapper.le("wbamount", withheldbillPageRequest.getMax_wbamount());
         }
+        queryWrapper.eq("wbFinancialID",withheldbillPageRequest.getWbFinancialID());
         //生成新的分页信息
         List<Withheldbill> withheldbills=withheldbillDao.selectList(queryWrapper);
         return Result.success(new PageInfo<>(withheldbills));
