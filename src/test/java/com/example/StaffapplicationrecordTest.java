@@ -32,7 +32,10 @@ public class StaffapplicationrecordTest {
 //        String Status = null;
         StaffapplicationrecordPageRequest sarPR = new StaffapplicationrecordPageRequest();
         sarPR.setSarPass("通过");
+        sarPR.setPageSize(10);
+        sarPR.setPageNum(1);
         System.out.println(sarPR);
+
 //        for (Staffapplicationrecord sar : sarService.getSarByCondition(SarID, Cid, Sid, startTime, endTime, Status)) {
 //            System.out.println(sar);
 //        }

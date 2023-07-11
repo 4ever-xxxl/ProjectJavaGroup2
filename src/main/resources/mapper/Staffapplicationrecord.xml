@@ -50,19 +50,20 @@
     </select>
 
     <select id="searchSar" resultType="com.example.entity.Staffapplicationrecord">
+        <bind name="offset" value="(pageSize * (pageNum - 1))" />
         select * from staffapplicationrecord
-        <if test="sarCompanyID != 0">
+        <if test="sarCompanyID != null and sarCompanyID != 0">
             left join staff on staffapplicationrecord.sarStaffID = staff.sID
         </if>
         where 1 = 1
-        <if test="sarCompanyID != 0">
+        <if test="sarCompanyID!=null and sarCompanyID != 0">
             and sCompanyID = #{sarCompanyID}
         </if>
         <if test="sarID!=null and sarID != 0">
             and sarID = #{sarID}
         </if>
 
-        <if test="sarStaffID != 0">
+        <if test="sarStaffID!=null and sarStaffID != 0">
             and sarStaffID = #{sarStaffID}
         </if>
 
@@ -77,6 +78,7 @@
         <if test="sarPass !=null and sarPass != ''">
             and sarPass = #{sarPass}
         </if>
+        LIMIT #{pageSize} OFFSET #{offset};
     </select>
 
     <!--新增申请记录-->
