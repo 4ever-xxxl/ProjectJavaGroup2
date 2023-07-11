@@ -57,9 +57,10 @@ public class StaffController {
     {
         PageHelper.startPage(staffPageRequest.getPageNum(),staffPageRequest.getPageSize());
         List<Staff> staffs=staffService.searchStaff(staffPageRequest);
-        PageInfo<Staff> pageInfo=new PageInfo<>(staffs);
-        List<Staff> staff=pageInfo.getList();
-        return Result.success(staff);
+       
+        return Result.success(new PageInfo<>(staffs));
     }
 
 }
+
+

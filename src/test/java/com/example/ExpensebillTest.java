@@ -2,17 +2,18 @@ package com.example;
 
 import com.example.common.Result;
 import com.example.controller.Request.ExpensebillPageRequest;
+import com.example.dao.AccountDao;
 import com.example.dao.ExpensebillDao;
+import com.example.entity.Account;
 import com.example.entity.Expensebill;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
 /**
  * 方法阅读说明:Dao是基础SQL语句到接口方法的映射，sql语句写在（表名）.xml文件中
  * I{表名}Service是对Dao中接口的进一步封装（依然是接口），涉及到增删改三个方法，主要作用是将Dao中方法的Integer返回值类型封装为为Result,并且对Dao中sql语句返回的异常进行捕捉与处理
@@ -24,14 +25,24 @@ import java.util.List;
 public class ExpensebillTest {
     @Resource
     private ExpensebillDao expensebilldao;
+    @Resource
+    private AccountDao accountdao;
 
     @Test
     public void addExpensebill() {
         Integer effectedRow;
+
+
         Date date=new Date(123, Calendar.JULY,7,15,0,0);
-        Expensebill expensebill = new Expensebill(1,2,3,111111.11,date,"TestObject");
+        BigDecimal bigDecimal=new BigDecimal(1000);
+
+        Expensebill expensebill = new Expensebill(1,2,1,bigDecimal,date,"TestObject");
+
+
+        Account account=new Account(expensebill.getEbAccountID(),"",expensebill.getEbAmount());
         try {
             effectedRow = expensebilldao.addExpensebill(expensebill);
+            accountdao.updateBecauseExpensebill(account);
             System.out.println(Result.success(effectedRow));
         } catch (DuplicateKeyException e) {
             System.out.println(Result.error("添加失败！非法主键！" + e));
@@ -42,7 +53,8 @@ public class ExpensebillTest {
     public void updateExpensebill() {
         Integer effectedRow;
         Date date=new Date(123, Calendar.JULY,7,15,0,0);
-        Expensebill expensebill = new Expensebill(1,2,3,111111.11,date,"UpdateTestObject");
+        BigDecimal bigDecimal=new BigDecimal("11111111.11");
+        Expensebill expensebill = new Expensebill(1,2,3,bigDecimal,date,"UpdateTestObject");
         try {
             effectedRow = expensebilldao.updateExpensebill(expensebill);
             System.out.println(Result.success(effectedRow));
@@ -94,18 +106,14 @@ public class ExpensebillTest {
             System.out.println(expensebill);
         }
     }
-   /*
-     要使用此测试方法，需将StaffPageRequest中的相关属性访问权限更改为public
+
     @Test
     public void searchExpensebill(){
         ExpensebillPageRequest expensebillPageRequest=new ExpensebillPageRequest();
-        expensebillPageRequest.minDate=new Date(100,Calendar.JULY,7,15,0,0);
-        expensebillPageRequest.maxDate=new Date(123,Calendar.JULY,7,15,0,0);
-        List<Expensebill> expensebills=expensebilldao.searchExpensebill(expensebillPageRequest);
+        expensebillPageRequest.setEbAccountID(1);
         for (Expensebill expensebill :
                 expensebilldao.searchExpensebill(expensebillPageRequest)) {
             System.out.println(expensebill);
         }
     }
-    */
 }
