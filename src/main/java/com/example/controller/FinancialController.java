@@ -52,7 +52,7 @@ public class FinancialController {
         //生成新的分页信息
         PageInfo<Financial> pageInfo=new PageInfo<>(financials);
         List<Financial> financial=pageInfo.getList();
-        return Result.success(financial);
+        return Result.success(new PageInfo<>(financials));
     }
 
 }
