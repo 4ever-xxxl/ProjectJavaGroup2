@@ -60,6 +60,7 @@ public class CollectBill implements Serializable {
     /**
      * 结单时间
      */
+
     private Date cbstatetime;
 
     @TableField(exist = false)
