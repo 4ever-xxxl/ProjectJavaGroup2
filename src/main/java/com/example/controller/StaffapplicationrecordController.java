@@ -24,7 +24,7 @@ public class StaffapplicationrecordController {
     @Autowired
     IStaffService staffService;
 
-    @PostMapping("/getSarByCondition")
+    @PostMapping("/searchStaffapplicationrecord")
     public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
         Long sarID = sarPageRequest.getSarID();
         Long sID = sarPageRequest.getSarStaffID();
@@ -35,12 +35,12 @@ public class StaffapplicationrecordController {
         return Result.success(sarService.getSarByCondition(sarID,sID,cID,startTime,endTime,sarPass));
     }
 
-    @PostMapping("/addSar")
+    @PostMapping("/addStaffapplicationrecord")
     public Result addSar(@RequestBody Staffapplicationrecord sar){
         return Result.success(sarService.addSar(sar));
     }
 
-    @PostMapping("/updateSar")
+    @PutMapping("/updateStaffapplicationrecord")
     public Result updateSar(@RequestBody Staffapplicationrecord sar){
         try{
             sarService.updateSar(sar);
@@ -56,7 +56,7 @@ public class StaffapplicationrecordController {
         }
     }
 
-    @GetMapping("/deleteSar/{sarID}")
+    @GetMapping("/deleteStaffapplicationrecord/{sarID}")
     public Result deleteSar(@PathVariable("sarID") Long sarID){
         return Result.success(sarService.deleteSar(sarID));
     }

@@ -13,7 +13,7 @@ public class DpfederationController {
     @Autowired
     private DpfederationService dpfService;
 
-    @PostMapping("/getDpfByCondition")
+    @PostMapping("/searchDpfederation")
     public Result getDpfByCondition(@RequestBody DpfederationPageRequest dpfPageRequest){
         Long dpfID = dpfPageRequest.getDpfID();
         String dpfRegion = dpfPageRequest.getDpfRegion();
@@ -21,17 +21,17 @@ public class DpfederationController {
         return Result.success(dpfService.getDpfByCondition(dpfID,dpfRegion,dpfParentID));
     }
 
-    @PostMapping("/addDpf")
+    @PostMapping("/addDpfederation")
     public Result addDpf(@RequestBody Dpfederation dpf){
         return Result.success(dpfService.addDpf(dpf));
     }
 
-    @PostMapping("/updateDpf")
+    @PutMapping("/updateDpfederation")
     public Result updateDpf(@RequestBody Dpfederation dpf){
         return Result.success(dpfService.updateDpf(dpf));
     }
 
-    @GetMapping("/deleteDpf/{dpfID}")
+    @GetMapping("/deleteDpfederation/{dpfID}")
     public Result deleteDpf(@PathVariable("dpfID") Long dpfID){
         return Result.success(dpfService.deleteDpf(dpfID));
     }
