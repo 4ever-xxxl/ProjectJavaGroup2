@@ -41,18 +41,18 @@ public class CompanyController {
     @PostMapping("/addCompany")
     public Result addCompanyStuff(@RequestBody Company company)
     {
-        return Result.success(companyservice.addCompany(company));
+        return companyservice.addCompany(company);
     }
 
     @PutMapping("/updateCompany")
     public Result updateCompany(@RequestBody Company company)
     {
-        return Result.success(companyservice.updateCompany(company));
+        return companyservice.updateCompany(company);
     }
 
     @DeleteMapping("/deleteCompany/{cID}")
     public Result deleteCompany(@PathVariable long cID){
-        return  Result.success(companyservice.deleteCompanyById(cID));
+        return  companyservice.deleteCompanyById(cID);
     }
 
 
