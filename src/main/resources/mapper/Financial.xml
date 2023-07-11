@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.FinancialDao">
+
+    <select id="getAllFinancial" resultType="com.example.entity.Financial">
+        SELECT * FROM financial
+    </select>
+
+    <select id="searchFinancial" resultType="com.example.entity.Financial">
+        select *
+        from financial
+        where 1=1
+        <if test="fregion != null and fregion != ''">
+            and fregion like concat('%', #{ fregion }, '%')
+        </if>
+        <if test="fId != 0">
+            and fID = #{fId}
+        </if>
+        <if test="fParentId != 0">
+            and fParentID = #{fParentId}
+        </if>
+    </select>
+
+    <insert id="addFinancial">
+        insert into financial (fID,fregion,fParentID)
+            value (#{fId},#{fregion},#{fParentId})
+    </insert>
+
+    <delete id="deleteFinancial">
+        delete from financial where fID=#{fId}
+    </delete>
+    <update id="updateFinancial">
+        update user set
+        fID=fID,
+        <if test="fregion != null and fregion != ''">
+            fregion=#{fregion},
+        </if>
+        <if test="fParentId != null and  fParentId!= ''">
+            fParentID=#{fParentId},
+        </if>
+        fID=fID
+        where fID=#{fID}
+    </update>
+</mapper>

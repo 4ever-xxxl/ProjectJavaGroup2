@@ -7,6 +7,10 @@
     <select id="list" resultType="com.example.entity.Staff">
         select * from staff
     </select>
+
+    <select id="getStaffById" resultType="com.example.entity.Staff">
+        select * from staff where sID=#{staffId}
+    </select>
     <select id="searchStaff" resultType="com.example.entity.Staff">
         select *
         from staff
@@ -26,9 +30,6 @@
         <if test="companyId != 0">
             and sCompanyId = #{companyId}
         </if>
-        <if test="id != 0">
-            and sID = #{id}
-        </if>
         <if test="address != null and address != ''">
             and sAddress like CONCAT('%', #{address}, '%')
         </if>
@@ -42,7 +43,6 @@
             sSex = #{sSex},
             sIdNum = #{sIdNum},
             sPhone = #{sPhone},
-            sDisabled = #{sDisabled},
             sAddress = #{sAddress},
             sEduBackground = #{sEduBackground},
             sPosition = #{sPosition},
