@@ -1,8 +1,11 @@
 package com.example.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.common.Result;
 import com.example.controller.Request.AccountPageRequest;
+import com.example.controller.Request.WithheldbillPageRequest;
 import com.example.dao.WithheldbillDao;
+import com.example.entity.Account;
 import com.example.entity.Withheldbill;
 import com.example.service.Imp.WithheldbillService;
 import com.github.pagehelper.PageHelper;
@@ -60,12 +63,19 @@ public class WithheldbillController {
     }
 
     @PostMapping("/searchWithheldbill")
-    public Result searchWithheldbill(@RequestBody AccountPageRequest accountPageRequest){
-        PageHelper.startPage(accountPageRequest.getPageNum(),accountPageRequest.getPageSize());
-
-        List<Withheldbill> withheldbills=withheldbillDao.selectList(null);
+    public Result searchWithheldbill(@RequestBody WithheldbillPageRequest withheldbillPageRequest){
+        PageHelper.startPage(withheldbillPageRequest.getPageNum(),withheldbillPageRequest.getPageSize());
+        QueryWrapper<Withheldbill> queryWrapper=new QueryWrapper<>();
+        if (withheldbillPageRequest.getMin_wbamount() != null && withheldbillPageRequest.getMax_wbamount() != null) {
+            queryWrapper.between("wbamount", withheldbillPageRequest.getMin_wbamount(), withheldbillPageRequest.getMax_wbamount());
+        } else if (withheldbillPageRequest.getMin_wbamount() != null) {
+            queryWrapper.ge("wbamount", withheldbillPageRequest.getMin_wbamount());
+        } else if (withheldbillPageRequest.getMax_wbamount() != null) {
+            queryWrapper.le("wbamount", withheldbillPageRequest.getMax_wbamount());
+        }
 
         //生成新的分页信息
+        List<Withheldbill> withheldbills=withheldbillDao.selectList(queryWrapper);
         return Result.success(new PageInfo<>(withheldbills));
     }
 

@@ -45,20 +45,7 @@ public class StaffapplicationrecordService implements IStaffapplicationrecordSer
 
     @Override
     public int updateSar(Staffapplicationrecord sar) {
-        try{
-            sarDao.updateSar(sar);
-//            if(sar.getSarpass()=="通过")
-//                staffService.updateStaffHealth(sar.getsID());
-            // 需要staff的直接更改健康残疾的接口
-            return 1;
-        }
-        catch (Exception e){
-            System.out.println("更新失败");
-
-        }
-        finally {
-            return 0;
-        }
+            return sarDao.updateSar(sar);
     }
 
     @Override
