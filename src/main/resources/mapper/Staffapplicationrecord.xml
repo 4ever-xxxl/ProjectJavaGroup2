@@ -51,20 +51,20 @@
 
     <select id="searchSar" resultType="com.example.entity.Staffapplicationrecord">
         select * from staffapplicationrecord
-        <if test="cID != 0">
+        <if test="sarCompanyID != 0">
             left join staff on staffapplicationrecord.sarStaffID = staff.sID
         </if>
         where 1 = 1
-        <if test="cID != 0">
-            and sCompanyID = #{cID}
+        <if test="sarCompanyID != 0">
+            and sCompanyID = #{sarCompanyID}
         </if>
 
         <if test="sarID != 0">
             and sarID = #{sarID}
         </if>
 
-        <if test="sID != 0">
-            and sarStaffID = #{sID}
+        <if test="sarStaffID != 0">
+            and sarStaffID = #{sarStaffID}
         </if>
 
         <if test="startTime != null">
@@ -75,8 +75,8 @@
             and sartime &lt;= #{endTime}
         </if>
 
-        <if test="status !=null and status != ''">
-            and sarPass = #{status}
+        <if test="sarPass !=null and sarPass != ''">
+            and sarPass = #{sarPass}
         </if>
     </select>
 

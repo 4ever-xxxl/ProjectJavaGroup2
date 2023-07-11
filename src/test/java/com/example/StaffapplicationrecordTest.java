@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.controller.Request.StaffapplicationrecordPageRequest;
 import com.example.controller.StaffapplicationrecordController;
 import com.example.entity.Staffapplicationrecord;
 import com.example.service.Imp.StaffapplicationrecordService;
@@ -21,15 +22,21 @@ public class StaffapplicationrecordTest {
     @Test
     public void getSarByCondition() {
         System.out.println("[+] getSarByCondition");
-        Long SarID = 1L;
-        Long Cid = 0L;
-        Long Sid = 0L;
-        Date startTime = null;
-        Date endTime = null;
+//        Long SarID = 1L;
+//        Long Cid = 0L;
+//        Long Sid = 0L;
+//        Date startTime = null;
+//        Date endTime = null;
 //        Date startTime = new Date("2000/7/11 00:00:00");
 //        Date endTime = new Date("2021/7/11 12:00:00");
-        String Status = null;
-        for (Staffapplicationrecord sar : sarService.getSarByCondition(SarID, Cid, Sid, startTime, endTime, Status)) {
+//        String Status = null;
+        StaffapplicationrecordPageRequest sarPR = new StaffapplicationrecordPageRequest();
+        sarPR.setSarPass("通过");
+        System.out.println(sarPR);
+//        for (Staffapplicationrecord sar : sarService.getSarByCondition(SarID, Cid, Sid, startTime, endTime, Status)) {
+//            System.out.println(sar);
+//        }
+        for (Staffapplicationrecord sar : sarService.searchSar(sarPR)) {
             System.out.println(sar);
         }
     }

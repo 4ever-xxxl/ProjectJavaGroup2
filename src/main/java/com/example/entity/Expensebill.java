@@ -22,5 +22,7 @@ public class Expensebill {
         this.ebObject=ebObject;
         this.ebFinancialID=ebFinancialID;
     }
+    public Expensebill(){
 
+    }
 }
