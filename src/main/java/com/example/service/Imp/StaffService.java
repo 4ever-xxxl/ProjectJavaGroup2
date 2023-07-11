@@ -34,6 +34,11 @@ public class StaffService implements IStaffService {
         staffDao.updateStaff(staff);
     }
     @Override
+    public void updateStaffHealth(long id)
+    {
+        staffDao.updateStaffHealth(id);
+    }
+    @Override
     public void deleteStaff(long sId)
     {
         staffDao.deleteStaff(sId);

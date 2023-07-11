@@ -44,18 +44,18 @@ public class ExpensebillController {
     @PostMapping("/addExpensebill")
     public Result addExpensebillStuff(@RequestBody Expensebill expensebill)
     {
-        return Result.success(expensebillservice.addExpensebill(expensebill));
+        return expensebillservice.addExpensebill(expensebill);
     }
 
     @PutMapping("/updateExpensebill")
     public Result updateExpensebill(@RequestBody Expensebill expensebill)
     {
-        return Result.success(expensebillservice.updateExpensebill(expensebill));
+        return expensebillservice.updateExpensebill(expensebill);
     }
 
-    @DeleteMapping("/deleteExpensebillById/{ebID}")
+    @DeleteMapping("/deleteExpensebill/{ebID}")
     public Result deleteExpensebill(@PathVariable long ebID){
-        return  Result.success(expensebillservice.deleteExpensebillById(ebID));
+        return  expensebillservice.deleteExpensebillById(ebID);
     }
 
     @PostMapping("/searchExpensebill")

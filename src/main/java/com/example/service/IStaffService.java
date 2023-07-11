@@ -11,4 +11,5 @@ public interface IStaffService {
     void updateStaff(Staff staff);
     void deleteStaff(long sId);
     List<Staff> searchStaff(StaffPageRequest staffPageRequest);
+    void updateStaffHealth(long Id);
 }

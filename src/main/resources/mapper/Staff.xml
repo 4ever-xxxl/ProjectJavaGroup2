@@ -33,6 +33,7 @@
             and sAddress like CONCAT('%', #{address}, '%')
         </if>
     </select>
+    <select id="getStaff" resultType="com.example.entity.Staff"></select>
 
 
     <update id="updateStaff">
@@ -47,7 +48,13 @@
             sPosition = #{sPosition},
             sHireDate = #{sHireDate},
             sSalary = #{sSalary}
-        where sID = #{sId} and sCompanyId = #{sCompanyId}
+        where sID = #{sId}
+    </update>
+
+    <update id="updateStaffHealth">
+        update staff
+        set sDisabled = "残疾"
+        where sID = #{id}
     </update>
 
     <delete id="deleteStaff">
