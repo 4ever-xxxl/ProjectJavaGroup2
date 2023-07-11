@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.common.Result;
+import com.example.controller.Request.CompanyPageRequest;
 import com.example.dao.CompanyDao;
 import com.example.entity.Company;
 import org.junit.jupiter.api.Test;
@@ -74,6 +75,17 @@ public class CompanyTest {
     public void getCompanyByName(){
         for (Company company:
                 companydao.getCompanyByName('%'+"子"+'%')) {
+            System.out.println(company);
+        }
+    }
+
+
+    @Test
+    public void searchExpensebill(){
+        CompanyPageRequest companyPageRequest=new CompanyPageRequest();
+        companyPageRequest.setCName("子");
+        for (Company company :
+                companydao.searchCompany(companyPageRequest)) {
             System.out.println(company);
         }
     }

@@ -4,6 +4,7 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.controller.Request.StaffapplicationrecordPageRequest;
 import com.example.dao.StaffapplicationrecordDao;
+import com.example.entity.Staffapplicationrecord;
 import com.example.service.Imp.StaffapplicationrecordService;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,15 @@ public class StaffapplicationrecordController {
         return Result.success(sardao.getSarByCondition(sarID,sID,cID,startTime,endTime,sarPass));
     }
 
+    @PostMapping("/addSar")
+    public Result addSar(@RequestBody Staffapplicationrecord sar){
+        return Result.success(sardao.addSar(sar));
+    }
+
+    @PostMapping("/updateSar")
+    public Result updateSar(@RequestBody Staffapplicationrecord sar){
+        return Result.success(sardao.updateSar(sar));
+    }
 
 
 

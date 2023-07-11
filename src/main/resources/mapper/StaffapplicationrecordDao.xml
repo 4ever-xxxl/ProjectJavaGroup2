@@ -15,6 +15,7 @@
         sarID,sarTime,sarStaffID,
         sarPass
     </sql>
+
     <!--多条件查询-->
     <select id="getSarByCondition" resultType="com.example.entity.Staffapplicationrecord">
         select * from staffapplicationrecord
@@ -49,7 +50,7 @@
     </select>
 
     <!--新增申请记录-->
-    <insert id="addStaffapplicationrecord">
+    <insert id="addSar">
         insert into staffapplicationrecord
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="sartime != null">
@@ -74,5 +75,27 @@
             </if>
         </trim>
     </insert>
+
+    <!--修改申请记录-->
+    <update id="updateSar">
+        UPDATE staffapplicationrecord
+        SET
+        <if test="sartime != null">
+            sarTime = #{sartime},
+        </if>
+        <if test="sarstaffid != null">
+            sarStaffID = #{sarstaffid},
+        </if>
+        <if test="sarpass != null">
+            sarPass = #{sarpass},
+        </if>
+        WHERE sarID = #{sarid}
+    </update>
+
+    <!--删除申请记录-->
+    <delete id="deleteSar">
+        DELETE FROM staffapplicationrecord
+        WHERE sarID = #{sarid}
+    </delete>
 
 </mapper>

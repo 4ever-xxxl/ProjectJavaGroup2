@@ -62,8 +62,8 @@ public class ExpensebillController {
     public Result searchExpensebill(@RequestBody ExpensebillPageRequest expensebillpagerequest)
     {
         PageHelper.startPage(expensebillpagerequest.getPageNum(),expensebillpagerequest.getPageSize());
-        List<Expensebill> companies=expensebillservice.searchExpensebill(expensebillpagerequest);
+        List<Expensebill> expensebills=expensebillservice.searchExpensebill(expensebillpagerequest);
 
-        return Result.success(new PageInfo<>(companies));
+        return Result.success(new PageInfo<>(expensebills));
     }
 }

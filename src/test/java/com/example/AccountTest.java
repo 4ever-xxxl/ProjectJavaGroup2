@@ -2,25 +2,28 @@ package com.example;
 
 import com.example.controller.AccountController;
 import com.example.controller.Request.AccountPageRequest;
+import com.example.entity.Account;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.SimpleFormatter;
 
 @SpringBootTest
-public class ApplicationTest {
-    @Autowired
+public class AccountTest {
+    @Resource
     AccountController accountController;
 
     @Test
     public void selectTest() throws ParseException {
         AccountPageRequest accountPageRequest = new AccountPageRequest();
-        System.out.println(accountController.searchAccount(accountPageRequest).toString());
-        System.out.println("success");
+        Account account=new Account();
+        account.setAbankcard("TestAccount");
+        account.setAbalance(new BigDecimal("114514.19"));
+
+        accountController.addAccount(account);
+        System.out.println("Test success");
     }
 }

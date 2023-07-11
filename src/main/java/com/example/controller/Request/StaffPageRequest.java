@@ -16,6 +16,8 @@ public class StaffPageRequest extends BaseRequest{
     private String disabled;
     @JsonProperty("address")
     private String address;
-    @JsonProperty("path")
-    private String path;
+    @JsonProperty("companyId")
+    private long companyId;
+    @JsonProperty("id")
+    private long id;
 }

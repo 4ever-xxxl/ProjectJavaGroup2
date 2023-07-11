@@ -39,7 +39,23 @@ public interface StaffapplicationrecordDao extends BaseMapper<Staffapplicationre
         * @return int
         * @createDate 2023-07-11 09:28:57
      */
-    int addStaffapplicationrecord(Staffapplicationrecord staffapplicationrecord);
+    int addSar(Staffapplicationrecord sar);
+
+    /*
+        * @description update【员工申请记录表】
+        * @param staffapplicationrecord
+        * @return int
+        * @createDate 2023-07-11 09:28:57
+     */
+    int updateSar(Staffapplicationrecord sar);
+
+    /*
+        * @description 通过ID删除【员工申请记录表】
+        * @param sarID
+        * @return int
+        * @createDate 2023-07-11 09:28:57
+     */
+    int deleteSarById(long sarID);
 
 }
 
