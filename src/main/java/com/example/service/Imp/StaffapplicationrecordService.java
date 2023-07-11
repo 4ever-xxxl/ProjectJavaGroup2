@@ -1,5 +1,6 @@
 package com.example.service.Imp;
 
+import com.example.controller.Request.StaffapplicationrecordPageRequest;
 import com.example.dao.StaffapplicationrecordDao;
 import com.example.entity.Staffapplicationrecord;
 import com.example.service.IStaffapplicationrecordService;
@@ -46,6 +47,11 @@ public class StaffapplicationrecordService implements IStaffapplicationrecordSer
     @Override
     public int deleteSar(long sarID) {
         return sarDao.deleteSar(sarID);
+    }
+
+    @Override
+    public List<Staffapplicationrecord> searchSar(StaffapplicationrecordPageRequest SarPR) {
+        return sarDao.searchSar(SarPR);
     }
 }
 
