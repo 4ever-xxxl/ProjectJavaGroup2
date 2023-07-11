@@ -21,10 +21,8 @@ import java.util.Map;
 public class StaffController {
     @Autowired
     private IStaffService staffService;
-
-
-    @GetMapping("/getAllCompanyStaff")
-    public Result getAllCompanyStaff()
+    @GetMapping("/getAllStaff")
+    public Result getAllStaff()
     {
         System.out.println("成功staff");
         return Result.success(staffService.list());
@@ -34,69 +32,34 @@ public class StaffController {
     {
         return "hello";
     }
-    @GetMapping("/{companyId}/{staffId}")
-    public Result getCompanyStaff(@PathVariable long companyId,@PathVariable long staffId){
-
-        return Result.success(staffService.getCompanyStaff(companyId,staffId));
-    }
-    @PostMapping("/addCompanyStaff")
+    @PostMapping("/addStaff")
     public Result addCompanyStuff(@RequestBody Staff staff)
     {
         staffService.addCompanyStuff(staff);
         return Result.success();
     }
 
-    @PutMapping("/updateCompanyStaff")
-    public Result updateCompanyStaff(@RequestBody Staff staff)
+    @PutMapping("/updateStaff")
+    public Result updateStaff(@RequestBody Staff staff)
     {
-        staffService.updateCompanyStaff(staff);
+        staffService.updateStaff(staff);
         return Result.success();
     }
 
-    @DeleteMapping("/deleteCompanyStaff/{companyId}/{sId}")
-    public Result deleteCompanyStaff(@PathVariable long companyId,@PathVariable long sId){
-        staffService.deleteCompanyStaff(companyId,sId);
+    @DeleteMapping("/deleteStaff/{sId}")
+    public Result deleteStaff(@PathVariable long sId){
+        staffService.deleteStaff(sId);
         return Result.success();
     }
 
-    @PostMapping("/searchCompanyStaff")
-    public Result searchCompanyStaff(@RequestBody StaffPageRequest staffPageRequest)
+    @PostMapping("/searchStaff")
+    public Result searchStaff(@RequestBody StaffPageRequest staffPageRequest)
     {
         PageHelper.startPage(staffPageRequest.getPageNum(),staffPageRequest.getPageSize());
-        List<Staff> staffs=staffService.searchCompanyStaff(staffPageRequest);
+        List<Staff> staffs=staffService.searchStaff(staffPageRequest);
 
         //生成新的分页信息
-        PageInfo<Staff> pageInfo=new PageInfo<>(staffs);
-        List<Staff> staff=pageInfo.getList();
-        return Result.success(staff);
-    }
-
-    @PostMapping("importUnitEmployees")
-    public Result importUnitEmployees()
-    {
-        return Result.success();
-    }
-
-    @GetMapping("/exportUnitEmployees")
-    public Result exportUnitEmployees(@RequestBody StaffPageRequest staffPageRequest)
-    {
-        System.out.println(staffPageRequest.getPageNum());
-        PageHelper.startPage(staffPageRequest.getPageNum(),staffPageRequest.getPageSize());
-        List<Staff> staffs=staffService.searchCompanyStaff(staffPageRequest);
-        List<Staff> staff=new PageInfo<>(staffs).getList();
-        ExcelWriter excelWriter = EasyExcel.write(staffPageRequest.getPath(),Staff.class).build();
-        WriteSheet sheet=EasyExcel.writerSheet("staff").build();
-
-        try {
-            excelWriter.write(staff, sheet);
-        } catch (Exception e) {
-            // 处理异常的代码
-            e.printStackTrace(); // 输出异常堆栈轨迹信息
-            // 其他异常处理逻辑...
-        }
-        excelWriter.finish();
-        System.out.println(staff.get(1).getSName());
-        return Result.success();
+        return Result.success(new PageInfo<>(staffs));
     }
 
 }

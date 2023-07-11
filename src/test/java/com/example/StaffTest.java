@@ -18,7 +18,7 @@ public class StaffTest {
         staffPageRequest.minSalary=2000;
         staffPageRequest.maxSalary=10000;
         for (Staff staff:
-                staffdao.searchCompanyStaff(staffPageRequest)) {
+                staffdao.searchStaff(staffPageRequest)) {
             System.out.println(staff);
         }
     }

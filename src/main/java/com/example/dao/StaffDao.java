@@ -18,9 +18,9 @@ public interface StaffDao {
 //    Staff getStaffById(Integer id);
 //    List<Staff> getStaffbyname(String name);
 //    void updateDisablityByNo(String idname);
-    Staff getCompanyStaff(@Param("companyId")long companyId,@Param("staffId") long staffId);
+    Staff getStaff(@Param("companyId")long companyId,@Param("staffId") long staffId);
     void addCompanyStuff(Staff staff);
-    void updateCompanyStaff(Staff staff);
-    void deleteCompanyStaff(long companyId,long sId);
-    List<Staff> searchCompanyStaff(StaffPageRequest staffPageRequest);
+    void updateStaff(Staff staff);
+    void deleteStaff(long sId);
+    List<Staff> searchStaff(StaffPageRequest staffPageRequest);
 }
