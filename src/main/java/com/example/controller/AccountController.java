@@ -11,6 +11,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -31,6 +33,8 @@ public class AccountController {
     @PostMapping("/addAccount")
     public Result addAccount(@RequestBody Account account){
         try{
+            //获取加入数据库的时间
+            account.setAlastupdate(new Date());
             accountDao.insert(account);
             return Result.success();
         }catch(Exception e){
@@ -83,6 +87,7 @@ public class AccountController {
     @PutMapping("/updateAccount")
     public Result updateAccount(@RequestBody Account account){
         try{
+            account.setAlastupdate(new Date());
             accountDao.updateById(account);
             return Result.success();
         }catch(Exception e){
