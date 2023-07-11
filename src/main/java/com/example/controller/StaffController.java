@@ -60,6 +60,12 @@ public class StaffController {
        
         return Result.success(new PageInfo<>(staffs));
     }
+    @GetMapping("/updateStaffHealth/{id}")
+    public Result updateStaffHealth(@PathVariable long id)
+    {
+        staffService.updateStaffHealth(id);
+        return Result.success();
+    }
 
 }
 

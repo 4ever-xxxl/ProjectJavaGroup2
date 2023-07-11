@@ -11,16 +11,11 @@ import java.util.List;
 @Repository
 @Component
 public interface StaffDao {
-//    List<Staff> getAllStaff();
-//    void saveStaff(Staff staff);
     List<Staff> list();
-//    List<Staff> getStaffByCondition(BaseRequest baseRequest);
-//    Staff getStaffById(Integer id);
-//    List<Staff> getStaffbyname(String name);
-//    void updateDisablityByNo(String idname);
     Staff getStaff(@Param("companyId")long companyId,@Param("staffId") long staffId);
     void addCompanyStuff(Staff staff);
     void updateStaff(Staff staff);
     void deleteStaff(long sId);
     List<Staff> searchStaff(StaffPageRequest staffPageRequest);
+    void updateStaffHealth(long id);
 }
