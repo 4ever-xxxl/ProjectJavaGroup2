@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.DpfederationDao">
+
+    <resultMap id="BaseResultMap" type="com.example.entity.Dpfederation">
+            <id property="dpfid" column="dpfID" jdbcType="BIGINT"/>
+            <result property="dpfregion" column="dpfRegion" jdbcType="VARCHAR"/>
+            <result property="dpfparentid" column="dpfParentID" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        dpfID,dpfRegion,dpfParentID
+    </sql>
+    <insert id="addDpf">
+        insert into dpfederation
+            (dpfRegion,dpfParentID)
+        value
+            (#{dpfRegion},#{dpfParentID})
+    </insert>
+
+    <delete id="deleteDpf">
+        delete from dpfederation
+        where dpfID = #{dpfid}
+    </delete>
+
+    <update id="updateDpf">
+        update dpfederation
+        <set>
+            <if test="dpfRegion != null and dpfRegion != ''">
+                dpfRegion = #{dpfRegion},
+            </if>
+            <if test="dpfParentID != 0">
+                dpfParentID = #{dpfParentID},
+            </if>
+        </set>
+        where dpfID = #{dpfID}
+    </update>
+
+    <select id="getDpfByCondition" resultType="com.example.entity.Dpfederation">
+        select * from dpfederation
+        where 1 = 1
+            <if test="dpfID != 0">
+                and dpfID = #{dpfID}
+            </if>
+            <if test="dpfRegion != null and dpfRegion != ''">
+                and dpfRegion = #{dpfRegion}
+            </if>
+            <if test="dpfParentID != 0">
+                and dpfParentID = #{dpfParentID}
+            </if>
+    </select>
+</mapper>
