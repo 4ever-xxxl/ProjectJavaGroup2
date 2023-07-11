@@ -7,6 +7,7 @@ import com.example.dao.ExpensebillDao;
 import com.example.entity.Account;
 import com.example.entity.Expensebill;
 import com.example.service.IExpensebillService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +42,8 @@ public class ExpensebillService implements IExpensebillService {
 
 
             return Result.success(effectedRow);
-        }catch (DuplicateKeyException e){
-            return Result.error("添加失败！非法主键！");
+        }catch (DataIntegrityViolationException e){
+            return Result.error("添加失败！添加的支出账户ID或支出财政局部门ID不存在！或添加了重复的支出账单ID!");
         }
     }
 
