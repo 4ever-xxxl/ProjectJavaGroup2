@@ -21,10 +21,8 @@ import java.util.Map;
 public class StaffController {
     @Autowired
     private IStaffService staffService;
-
-
-    @GetMapping("/getAllCompanyStaff")
-    public Result getAllCompanyStaff()
+    @GetMapping("/getAllStaff")
+    public Result getAllStaff()
     {
         System.out.println("成功staff");
         return Result.success(staffService.list());
@@ -34,31 +32,31 @@ public class StaffController {
     {
         return "hello";
     }
-    @PostMapping("/addCompanyStaff")
+    @PostMapping("/addStaff")
     public Result addCompanyStuff(@RequestBody Staff staff)
     {
         staffService.addCompanyStuff(staff);
         return Result.success();
     }
 
-    @PutMapping("/updateCompanyStaff")
-    public Result updateCompanyStaff(@RequestBody Staff staff)
+    @PutMapping("/updateStaff")
+    public Result updateStaff(@RequestBody Staff staff)
     {
-        staffService.updateCompanyStaff(staff);
+        staffService.updateStaff(staff);
         return Result.success();
     }
 
-    @DeleteMapping("/deleteCompanyStaff/{sId}")
-    public Result deleteCompanyStaff(@PathVariable long sId){
-        staffService.deleteCompanyStaff(sId);
+    @DeleteMapping("/deleteStaff/{sId}")
+    public Result deleteStaff(@PathVariable long sId){
+        staffService.deleteStaff(sId);
         return Result.success();
     }
 
-    @PostMapping("/searchCompanyStaff")
-    public Result searchCompanyStaff(@RequestBody StaffPageRequest staffPageRequest)
+    @PostMapping("/searchStaff")
+    public Result searchStaff(@RequestBody StaffPageRequest staffPageRequest)
     {
         PageHelper.startPage(staffPageRequest.getPageNum(),staffPageRequest.getPageSize());
-        List<Staff> staffs=staffService.searchCompanyStaff(staffPageRequest);
+        List<Staff> staffs=staffService.searchStaff(staffPageRequest);
 
         //生成新的分页信息
         PageInfo<Staff> pageInfo=new PageInfo<>(staffs);

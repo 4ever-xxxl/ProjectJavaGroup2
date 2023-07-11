@@ -7,7 +7,7 @@
     <select id="list" resultType="com.example.entity.Staff">
         select * from staff
     </select>
-    <select id="searchCompanyStaff" resultType="com.example.entity.Staff">
+    <select id="searchStaff" resultType="com.example.entity.Staff">
         select *
         from staff
         where 1=1
@@ -35,7 +35,7 @@
     </select>
 
 
-    <update id="updateCompanyStaff">
+    <update id="updateStaff">
         update staff
         set sName = #{sName},
             sSex = #{sSex},
@@ -50,7 +50,7 @@
         where sID = #{sId} and sCompanyId = #{sCompanyId}
     </update>
 
-    <delete id="deleteCompanyStaff">
+    <delete id="deleteStaff">
         delete from staff where sID=#{sId}
     </delete>
 

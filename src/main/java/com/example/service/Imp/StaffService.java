@@ -21,25 +21,25 @@ public class StaffService implements IStaffService {
         return staffDao.list();
     }
     @Override
-    public Staff getCompanyStaff(long companyId,long stuffId)   {
-        return staffDao.getCompanyStaff(companyId,stuffId);
+    public Staff getStaff(long companyId,long stuffId)   {
+        return staffDao.getStaff(companyId,stuffId);
     }
     @Override
     public void addCompanyStuff(Staff staff){
         staffDao.addCompanyStuff(staff);
     }
     @Override
-    public void updateCompanyStaff(Staff staff)
+    public void updateStaff(Staff staff)
     {
-        staffDao.updateCompanyStaff(staff);
+        staffDao.updateStaff(staff);
     }
     @Override
-    public void deleteCompanyStaff(long sId)
+    public void deleteStaff(long sId)
     {
-        staffDao.deleteCompanyStaff(sId);
+        staffDao.deleteStaff(sId);
     }
     @Override
-    public List<Staff> searchCompanyStaff(StaffPageRequest staffPageRequest){
-        return staffDao.searchCompanyStaff(staffPageRequest);
+    public List<Staff> searchStaff(StaffPageRequest staffPageRequest){
+        return staffDao.searchStaff(staffPageRequest);
     }
 }
