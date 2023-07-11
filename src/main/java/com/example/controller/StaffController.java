@@ -30,8 +30,13 @@ public class StaffController {
     @GetMapping("/getAllStaff")
     public Result getAllStaff()
     {
-        System.out.println("成功staff");
-        return Result.success(staffService.list());
+        try {
+            System.out.println("成功staff");
+            return Result.success(staffService.list());
+        }
+        catch (Exception e){
+            return Result.error(e.getMessage());
+        }
     }
     @GetMapping("/hello")
     private String hello()
@@ -41,37 +46,64 @@ public class StaffController {
     @PostMapping("/addStaff")
     public Result addCompanyStuff(@RequestBody Staff staff)
     {
-
-        staffService.addCompanyStuff(staff);
-        return Result.success();
+        try {
+            staffService.addCompanyStuff(staff);
+            return Result.success();
+        }
+        catch (Exception e)
+        {
+            return Result.error(e.getMessage());
+        }
     }
     @PutMapping("/updateStaff")
     public Result updateStaff(@RequestBody Staff staff)
     {
-        Staff staff1 =staffService.getStaffById(staff.getSId());
-        if(staff1.getSDisabled()=="健康"&&staff.getSDisabled()=="残疾"){
-            staffapplicationrecordService.addSar(new Staffapplicationrecord(0,new Date(),staff.getSId(),null));
+        try {
+            Staff staff1 =staffService.getStaffById(staff.getSId());
+            if(staff1.getSDisabled()=="健康"&&staff.getSDisabled()=="残疾"){
+                staffapplicationrecordService.addSar(new Staffapplicationrecord(0,new Date(),staff.getSId(),null));
+            }
+            staffService.updateStaff(staff);
+            return Result.success();
         }
-        staffService.updateStaff(staff);
-        return Result.success();
+        catch (Exception e)
+        {
+            return Result.error(e.getMessage());
+        }
+
     }
     @DeleteMapping("/deleteStaff/{sId}")
     public Result deleteStaff(@PathVariable long sId){
-        staffService.deleteStaff(sId);
-        return Result.success();
+        try{
+            staffService.deleteStaff(sId);
+            return Result.success();
+        }
+        catch (Exception e){
+            return Result.error(e.getMessage());
+        }
     }
     @PostMapping("/searchStaff")
     public Result searchStaff(@RequestBody StaffPageRequest staffPageRequest)
     {
+        try{
         PageHelper.startPage(staffPageRequest.getPageNum(),staffPageRequest.getPageSize());
         List<Staff> staffs=staffService.searchStaff(staffPageRequest);
-        return Result.success(new PageInfo<>(staffs));
+        return Result.success(new PageInfo<>(staffs));}
+        catch (Exception e){
+            return Result.error(e.getMessage());
+        }
     }
     @GetMapping("/updateStaffHealth/{id}")
     public Result updateStaffHealth(@PathVariable long id)
     {
-        staffService.updateStaffHealth(id);
-        return Result.success();
+        try {
+            staffService.updateStaffHealth(id);
+            return Result.success();
+        }
+        catch (Exception e)
+        {
+            return Result.error(e.getMessage());
+        }
     }
 }
 
