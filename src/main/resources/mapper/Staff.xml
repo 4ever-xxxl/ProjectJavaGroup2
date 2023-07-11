@@ -9,7 +9,7 @@
     </select>
 
     <select id="getStaffById" resultType="com.example.entity.Staff">
-        select * from staff where staffId=#{staffId}
+        select * from staff where sID=#{staffId}
     </select>
     <select id="searchStaff" resultType="com.example.entity.Staff">
         select *
@@ -42,7 +42,6 @@
             sSex = #{sSex},
             sIdNum = #{sIdNum},
             sPhone = #{sPhone},
-            sDisabled = #{sDisabled},
             sAddress = #{sAddress},
             sEduBackground = #{sEduBackground},
             sPosition = #{sPosition},

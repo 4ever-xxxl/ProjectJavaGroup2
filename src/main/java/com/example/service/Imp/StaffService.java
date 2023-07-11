@@ -43,4 +43,8 @@ public class StaffService implements IStaffService {
     public List<Staff> searchStaff(StaffPageRequest staffPageRequest){
         return staffDao.searchStaff(staffPageRequest);
     }
+    @Override
+    public Staff getStaffById(long staffId){
+        return staffDao.getStaffById(staffId);
+    }
 }
