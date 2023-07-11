@@ -30,7 +30,6 @@ public class UserController {
 
     @PostMapping("/addUser")
     public Result addUser(@RequestBody User user){
-        System.out.println(user.getUsrPasswd()+user.getUsrName());
         userService.addUser(user);
         return Result.success();
     }
@@ -49,7 +48,7 @@ public class UserController {
 
     @PutMapping("/updateUser")
     public Result updateUser(@RequestBody User user){
-        System.out.println(user);
+        System.out.println(user.getUsrName());
         userService.updateUser(user);
         return Result.success();
     }

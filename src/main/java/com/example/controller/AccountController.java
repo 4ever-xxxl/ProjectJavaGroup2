@@ -43,7 +43,7 @@ public class AccountController {
         }
     }
 
-    @DeleteMapping("/deleteAccount")
+    @DeleteMapping("/deleteAccount/{accountID}")
     public Result deleteAccount(@PathVariable long accountID){
         try{
             accountDao.deleteById(accountID);

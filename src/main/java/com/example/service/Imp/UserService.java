@@ -36,7 +36,7 @@ public class UserService implements IUserService {
     }
     @Override
     public void addUser(User user){
-        System.out.println(user.getUsrPasswd()+user.getUsrClass());
+        user.setUsrPasswd(securePass(user.getUsrPasswd()));
         userDao.addUser(user);
     }
     @Override
@@ -49,6 +49,10 @@ public class UserService implements IUserService {
     }
     @Override
     public void updateUser(User user){
+        user.setUsrPasswd(securePass(user.getUsrPasswd()));
+        System.out.println("passwd"+user.getUsrPasswd());
+        System.out.println("id"+userDao.getByUsrName(user.getUsrName()));
+        user.setUsrId(userDao.getByUsrName(user.getUsrName()).getUsrId());
         userDao.updateUser(user);
     }
     @Override
@@ -58,8 +62,6 @@ public class UserService implements IUserService {
     }
     @Override
     public LoginDTO Login(LoginRequest request) {
-        System.out.println("UserService测试");
-        System.out.println(request.getPassWd()+request.getUsrName());
         User user = null;
         try {
             user = userDao.getByUsrName(request.getUsrName());
@@ -68,7 +70,7 @@ public class UserService implements IUserService {
             throw new ServiceException("用户名错误");
         }
         if (user == null) {
-            throw new ServiceException("用户名或密码错误");
+            throw new ServiceException("用户名错误");
         }
         // 判断密码是否合法
         String securePass = securePass(request.getPassWd());
@@ -77,8 +79,11 @@ public class UserService implements IUserService {
         }*/
         System.out.println(user.getUsrPasswd()+"   "+request.getPassWd());
         System.out.println(user.getUsrPasswd().equals(request.getPassWd()));
-        if (!user.getUsrPasswd().equals(request.getPassWd())) {
-            throw new ServiceException("用户名或密码错误");
+        System.out.println(user.getUsrPasswd()+"?");
+        System.out.println(securePass);
+        System.out.println((!user.getUsrPasswd().equals(request.getPassWd()))&&(!securePass.equals(user.getUsrPasswd())));
+        if ((!user.getUsrPasswd().equals(request.getPassWd()))&&(!securePass.equals(user.getUsrPasswd()))) {
+            throw new ServiceException("用户名或密码错误123");
         }
         LoginDTO loginDTO = new LoginDTO();
         BeanUtils.copyProperties(user, loginDTO);

@@ -57,9 +57,10 @@ public class StaffController {
     {
         PageHelper.startPage(staffPageRequest.getPageNum(),staffPageRequest.getPageSize());
         List<Staff> staffs=staffService.searchStaff(staffPageRequest);
-
-        //生成新的分页信息
+       
         return Result.success(new PageInfo<>(staffs));
     }
 
 }
+
+

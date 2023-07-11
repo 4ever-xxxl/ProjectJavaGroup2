@@ -35,6 +35,17 @@ public class CollectBillController {
         return Result.success(collectBillService.list());
     }
 
+    @DeleteMapping("/deleteCollectBill/{cbId}")
+    public Result deleteCollectBill(@PathVariable long cbId){
+        try{
+            collectBillDao.deleteById(cbId);
+            return Result.success();
+        }catch(Exception e){
+            System.out.println("delete error");
+            return Result.error(e.toString());
+        }
+    }
+
     @PostMapping("/addCollectBill")
     public Result addCollectBill(@RequestBody CollectBill collectBill){
         try {

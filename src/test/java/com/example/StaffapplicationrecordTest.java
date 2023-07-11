@@ -12,19 +12,21 @@ import java.util.Date;
 @SpringBootTest
 public class StaffapplicationrecordTest {
     @Resource
-    private StaffapplicationrecordDao sarDao;
+    private StaffapplicationrecordService sarService;
 
 //    测试多条件查询
     @Test
     public void getSarByCondition() {
         System.out.println("[+] getSarByCondition");
-        Long SarID = 0L;
+        Long SarID = 1L;
         Long Cid = 0L;
         Long Sid = 0L;
-        Date startTime = new Date("2000/7/11 00:00:00");
-        Date endTime = new Date("2021/7/11 12:00:00");
+        Date startTime = null;
+        Date endTime = null;
+//        Date startTime = new Date("2000/7/11 00:00:00");
+//        Date endTime = new Date("2021/7/11 12:00:00");
         String Status = null;
-        for (Staffapplicationrecord sar : sarDao.getSarByCondition(SarID, Cid, Sid, startTime, endTime, Status)) {
+        for (Staffapplicationrecord sar : sarService.getSarByCondition(SarID, Cid, Sid, startTime, endTime, Status)) {
             System.out.println(sar);
         }
     }
@@ -35,7 +37,14 @@ public class StaffapplicationrecordTest {
         System.out.println("[+] addSar");
         Staffapplicationrecord sar = new Staffapplicationrecord(1000L,new Date("1145/1/14 12:00:00"),10L,"未处理");
         System.out.println(sar);
-        System.out.println(sarDao.addStaffapplicationrecord(sar));
+        System.out.println(sarService.addSar(sar));
+    }
+
+    // 测试修改
+    @Test
+    public void updateSar() {
+        System.out.println("[+] updateSar");
+
     }
 
 
