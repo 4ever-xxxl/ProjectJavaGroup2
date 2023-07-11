@@ -57,6 +57,9 @@ public interface StaffapplicationrecordDao extends BaseMapper<Staffapplicationre
      */
     int deleteSar(long sarID);
 
+
+    List<Staffapplicationrecord> searchSar(StaffapplicationrecordPageRequest SarPR);
+
 }
 
 

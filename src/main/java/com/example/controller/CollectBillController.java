@@ -49,6 +49,11 @@ public class CollectBillController {
     @PostMapping("/addCollectBill")
     public Result addCollectBill(@RequestBody CollectBill collectBill){
         try {
+            if(collectBill.getCbaccountid()==null||collectBill.getCbcompanyid()==null){
+                System.out.println("illegal insert:id");
+                return Result.error("illegal insert");
+            }
+            
             //如果已缴状态为空或者值不为”是“或”否“
             if(collectBill.getCbstatement() == null ||
                     (!collectBill.getCbstatement().equals("是")&&!collectBill.getCbstatement().equals("否"))){

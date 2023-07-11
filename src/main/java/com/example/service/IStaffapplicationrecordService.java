@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.common.Result;
+import com.example.controller.Request.StaffapplicationrecordPageRequest;
 import com.example.entity.Staffapplicationrecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -15,6 +16,8 @@ import java.util.List;
 public interface IStaffapplicationrecordService{
 
     List<Staffapplicationrecord> getSarByCondition(long sarID, long cID, long sID, Date startTime, Date endTime, String status);
+
+    List<Staffapplicationrecord> searchSar(StaffapplicationrecordPageRequest SarPR);
 
     int addSar(Staffapplicationrecord sar);
 

@@ -1,13 +1,12 @@
 package com.example.service.Imp;
 
+import com.example.controller.Request.StaffapplicationrecordPageRequest;
 import com.example.dao.StaffapplicationrecordDao;
 import com.example.entity.Staffapplicationrecord;
-import com.example.service.IStaffService;
 import com.example.service.IStaffapplicationrecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +17,6 @@ import java.util.List;
 */
 @Service
 public class StaffapplicationrecordService implements IStaffapplicationrecordService {
-
-    @Resource
-    private IStaffService staffService;
 
     private final StaffapplicationrecordDao sarDao;
 
@@ -51,6 +47,11 @@ public class StaffapplicationrecordService implements IStaffapplicationrecordSer
     @Override
     public int deleteSar(long sarID) {
         return sarDao.deleteSar(sarID);
+    }
+
+    @Override
+    public List<Staffapplicationrecord> searchSar(StaffapplicationrecordPageRequest SarPR) {
+        return sarDao.searchSar(SarPR);
     }
 }
 
