@@ -6,8 +6,10 @@ import com.example.dao.AccountDao;
 import com.example.dao.ExpensebillDao;
 import com.example.entity.Account;
 import com.example.entity.Expensebill;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 
 import javax.annotation.Resource;
@@ -36,7 +38,7 @@ public class ExpensebillTest {
         Date date=new Date(123, Calendar.JULY,7,15,0,0);
         BigDecimal bigDecimal=new BigDecimal(1000);
 
-        Expensebill expensebill = new Expensebill(1,2,1,bigDecimal,date,"TestObject");
+        Expensebill expensebill = new Expensebill();
 
 
         Account account=new Account(expensebill.getEbAccountID(),"",expensebill.getEbAmount());
@@ -44,8 +46,9 @@ public class ExpensebillTest {
             effectedRow = expensebilldao.addExpensebill(expensebill);
             accountdao.updateBecauseExpensebill(account);
             System.out.println(Result.success(effectedRow));
-        } catch (DuplicateKeyException e) {
-            System.out.println(Result.error("添加失败！非法主键！" + e));
+        }
+        catch (DataIntegrityViolationException e){
+            System.out.println("添加失败！添加的支出账户ID或支出财政局部门ID不存在！或添加了重复的支出账单ID!");
         }
     }
 
