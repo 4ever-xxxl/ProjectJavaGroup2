@@ -60,8 +60,12 @@ public class StaffController {
     {
         try {
             Staff staff1 =staffService.getStaffById(staff.getSId());
+            System.out.println(staff1.getSName()+staff1.getSDisabled());
             if(staff1.getSDisabled()=="健康"&&staff.getSDisabled()=="残疾"){
                 staffapplicationrecordService.addSar(new Staffapplicationrecord(0,new Date(),staff.getSId(),null));
+                staffService.updateStaffHealth(staff.getSId());
+                Staff staff2 =staffService.getStaffById(staff.getSId());
+                System.out.println(staff2.getSName()+staff2.getSDisabled());
             }
             staffService.updateStaff(staff);
             return Result.success();
@@ -70,7 +74,6 @@ public class StaffController {
         {
             return Result.error(e.getMessage());
         }
-
     }
     @DeleteMapping("/deleteStaff/{sId}")
     public Result deleteStaff(@PathVariable long sId){
