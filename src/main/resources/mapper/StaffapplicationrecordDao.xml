@@ -52,30 +52,9 @@
     <!--新增申请记录-->
     <insert id="addSar">
         insert into staffapplicationrecord
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sartime != null">
-                sarTime,
-            </if>
-            <if test="sarstaffid != null">
-                sarStaffID,
-            </if>
-            <if test="sarpass != null">
-                sarPass,
-            </if>
-            sarID
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="sartime != null">
-                #{sartime},
-            </if>
-            <if test="sarstaffid != null">
-                #{sarstaffid},
-            </if>
-            <if test="sarpass != null">
-                #{sarpass},
-            </if>
-            sarid
-        </trim>
+            (sarTime,sarStaffID,sarPass)
+        value
+            (#{sartime},#{sarstaffid},#{sarpass})
     </insert>
 
     <!--修改申请记录-->

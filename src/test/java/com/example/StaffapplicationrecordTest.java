@@ -39,7 +39,7 @@ public class StaffapplicationrecordTest {
     @Test
     public void addSar(){
         System.out.println("[+] addSar");
-        Staffapplicationrecord sar = new Staffapplicationrecord(1000L,new Date("1145/1/14 12:00:00"),10L,"未处理");
+        Staffapplicationrecord sar = new Staffapplicationrecord(1004L,new Date(),11L,"未处理");
         System.out.println(sar);
         System.out.println(sarService.addSar(sar));
     }
