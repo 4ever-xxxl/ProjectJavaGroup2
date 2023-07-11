@@ -34,9 +34,9 @@ public class StaffService implements IStaffService {
         staffDao.updateCompanyStaff(staff);
     }
     @Override
-    public void deleteCompanyStaff(long companyId,long sId)
+    public void deleteCompanyStaff(long sId)
     {
-        staffDao.deleteCompanyStaff(companyId,sId);
+        staffDao.deleteCompanyStaff(sId);
     }
     @Override
     public List<Staff> searchCompanyStaff(StaffPageRequest staffPageRequest){

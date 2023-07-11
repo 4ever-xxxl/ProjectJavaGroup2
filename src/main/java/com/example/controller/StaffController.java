@@ -34,11 +34,6 @@ public class StaffController {
     {
         return "hello";
     }
-    @GetMapping("/{companyId}/{staffId}")
-    public Result getCompanyStaff(@PathVariable long companyId,@PathVariable long staffId){
-
-        return Result.success(staffService.getCompanyStaff(companyId,staffId));
-    }
     @PostMapping("/addCompanyStaff")
     public Result addCompanyStuff(@RequestBody Staff staff)
     {
@@ -53,9 +48,9 @@ public class StaffController {
         return Result.success();
     }
 
-    @DeleteMapping("/deleteCompanyStaff/{companyId}/{sId}")
-    public Result deleteCompanyStaff(@PathVariable long companyId,@PathVariable long sId){
-        staffService.deleteCompanyStaff(companyId,sId);
+    @DeleteMapping("/deleteCompanyStaff/{sId}")
+    public Result deleteCompanyStaff(@PathVariable long sId){
+        staffService.deleteCompanyStaff(sId);
         return Result.success();
     }
 
@@ -69,34 +64,6 @@ public class StaffController {
         PageInfo<Staff> pageInfo=new PageInfo<>(staffs);
         List<Staff> staff=pageInfo.getList();
         return Result.success(staff);
-    }
-
-    @PostMapping("importUnitEmployees")
-    public Result importUnitEmployees()
-    {
-        return Result.success();
-    }
-
-    @GetMapping("/exportUnitEmployees")
-    public Result exportUnitEmployees(@RequestBody StaffPageRequest staffPageRequest)
-    {
-        System.out.println(staffPageRequest.getPageNum());
-        PageHelper.startPage(staffPageRequest.getPageNum(),staffPageRequest.getPageSize());
-        List<Staff> staffs=staffService.searchCompanyStaff(staffPageRequest);
-        List<Staff> staff=new PageInfo<>(staffs).getList();
-        ExcelWriter excelWriter = EasyExcel.write(staffPageRequest.getPath(),Staff.class).build();
-        WriteSheet sheet=EasyExcel.writerSheet("staff").build();
-
-        try {
-            excelWriter.write(staff, sheet);
-        } catch (Exception e) {
-            // 处理异常的代码
-            e.printStackTrace(); // 输出异常堆栈轨迹信息
-            // 其他异常处理逻辑...
-        }
-        excelWriter.finish();
-        System.out.println(staff.get(1).getSName());
-        return Result.success();
     }
 
 }

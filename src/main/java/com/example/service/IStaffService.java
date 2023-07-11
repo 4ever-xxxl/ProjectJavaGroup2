@@ -9,6 +9,6 @@ public interface IStaffService {
     Staff getCompanyStaff(long companyId,long stuffId);
     void addCompanyStuff(Staff staff);
     void updateCompanyStaff(Staff staff);
-    void deleteCompanyStaff(long companyId,long sId);
+    void deleteCompanyStaff(long sId);
     List<Staff> searchCompanyStaff(StaffPageRequest staffPageRequest);
 }

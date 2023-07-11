@@ -21,6 +21,6 @@ public interface StaffDao {
     Staff getCompanyStaff(@Param("companyId")long companyId,@Param("staffId") long staffId);
     void addCompanyStuff(Staff staff);
     void updateCompanyStaff(Staff staff);
-    void deleteCompanyStaff(long companyId,long sId);
+    void deleteCompanyStaff(long sId);
     List<Staff> searchCompanyStaff(StaffPageRequest staffPageRequest);
 }

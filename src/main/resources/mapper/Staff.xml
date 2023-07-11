@@ -7,10 +7,6 @@
     <select id="list" resultType="com.example.entity.Staff">
         select * from staff
     </select>
-    <select id="getCompanyStaff" resultType="com.example.entity.Staff">
-        select * from staff where sID =#{staffId} and sCompanyID=#{companyId};
-    </select>
-
     <select id="searchCompanyStaff" resultType="com.example.entity.Staff">
         select *
         from staff
@@ -29,6 +25,9 @@
         </if>
         <if test="companyId != 0">
             and sCompanyId = #{companyId}
+        </if>
+        <if test="id != 0">
+            and sID = #{id}
         </if>
         <if test="address != null and address != ''">
             and sAddress like CONCAT('%', #{address}, '%')
@@ -52,7 +51,7 @@
     </update>
 
     <delete id="deleteCompanyStaff">
-        delete from staff where sID=#{sId} and sCompanyId=#{companyId}
+        delete from staff where sID=#{sId}
     </delete>
 
     <insert id="addCompanyStuff">
