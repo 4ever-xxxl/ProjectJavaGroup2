@@ -62,6 +62,7 @@
             <if test="sarpass != null">
                 sarPass,
             </if>
+            sarID
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="sartime != null">
@@ -73,6 +74,7 @@
             <if test="sarpass != null">
                 #{sarpass},
             </if>
+            sarid
         </trim>
     </insert>
 
@@ -83,12 +85,13 @@
         <if test="sartime != null">
             sarTime = #{sartime},
         </if>
-        <if test="sarstaffid != null">
+        <if test="sarstaffid != 0">
             sarStaffID = #{sarstaffid},
         </if>
         <if test="sarpass != null">
             sarPass = #{sarpass},
         </if>
+        sarID = sarID
         WHERE sarID = #{sarid}
     </update>
 

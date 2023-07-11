@@ -50,7 +50,7 @@ public class CompanyController {
         return companyservice.updateCompany(company);
     }
 
-    @DeleteMapping("/deleteCompanyById/{cID}")
+    @DeleteMapping("/deleteCompany/{cID}")
     public Result deleteCompany(@PathVariable long cID){
         return  companyservice.deleteCompanyById(cID);
     }

@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.controller.StaffapplicationrecordController;
 import com.example.dao.StaffapplicationrecordDao;
 import com.example.entity.Staffapplicationrecord;
 import com.example.service.Imp.StaffapplicationrecordService;
@@ -13,6 +14,9 @@ import java.util.Date;
 public class StaffapplicationrecordTest {
     @Resource
     private StaffapplicationrecordService sarService;
+
+    @Resource
+    private StaffapplicationrecordController sarController;
 
 //    测试多条件查询
     @Test
@@ -44,7 +48,8 @@ public class StaffapplicationrecordTest {
     @Test
     public void updateSar() {
         System.out.println("[+] updateSar");
-
+        Staffapplicationrecord sar = new Staffapplicationrecord(93L,null,0,"通过");
+        System.out.println(sarController.updateSar(sar));
     }
 
 

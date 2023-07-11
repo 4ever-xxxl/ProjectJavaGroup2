@@ -5,6 +5,7 @@ import com.example.common.Result;
 import com.example.controller.Request.StaffapplicationrecordPageRequest;
 import com.example.dao.StaffapplicationrecordDao;
 import com.example.entity.Staffapplicationrecord;
+import com.example.service.IStaffService;
 import com.example.service.IStaffapplicationrecordService;
 import com.example.service.Imp.StaffapplicationrecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class StaffapplicationrecordController {
 
     @Autowired
     IStaffapplicationrecordService sarService;
+
+    @Autowired
+    IStaffService staffService;
 
     @PostMapping("/getSarByCondition")
     public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
@@ -38,7 +42,18 @@ public class StaffapplicationrecordController {
 
     @PostMapping("/updateSar")
     public Result updateSar(@RequestBody Staffapplicationrecord sar){
-        return Result.success(sarService.updateSar(sar));
+        try{
+            sarService.updateSar(sar);
+            if(sar.getSarpass()=="通过"){
+                System.out.println("更新成功");
+                Staffapplicationrecord tmpSar=sarService.getSarByCondition(sar.getSarid(),0L,0L,null,null,null).get(0);
+                System.out.println(tmpSar.getSarstaffid());
+                staffService.updateStaffHealth(tmpSar.getSarstaffid());
+            }
+            return Result.success("更新成功");
+        }catch (Exception e){
+            return Result.error("更新失败");
+        }
     }
 
     @GetMapping("/deleteSar/{sarID}")
