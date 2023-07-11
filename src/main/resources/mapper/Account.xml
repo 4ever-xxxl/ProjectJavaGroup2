@@ -11,8 +11,16 @@
             <result property="alastupdate" column="aLastUpdate" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+
     <sql id="Base_Column_List">
         aID,aBankCard,aBalance,
         aLastUpdate
     </sql>
+
+
+    <update id="updateBecauseExpensebill">
+    UPDATE account
+    SET aBalance=aBalance-#{abalance}
+    WHERE aID=#{aid}
+    </update>
 </mapper>

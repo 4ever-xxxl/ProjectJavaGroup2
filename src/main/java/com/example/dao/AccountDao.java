@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Component
 public interface AccountDao extends BaseMapper<Account> {
+
+    void updateBecauseExpensebill(Account account);
 }

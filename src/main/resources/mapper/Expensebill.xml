@@ -27,6 +27,15 @@
         SELECT *
         FROM expensebill
         WHERE 1=1
+        <if test="ebID != null and ebID != ''">
+            AND ebID=#{ebID}
+        </if>
+        <if test="ebAccountID != null and ebAccountID != ''">
+            AND ebAccountID=#{ebAccountID}
+        </if>
+        <if test="ebFinancialID != null and ebFinancialID != ''">
+            AND ebFinancialID=#{ebFinancialID}
+        </if>
         <if test="ebObject != null and ebObject != ''">
             AND ebObject like concat('%', #{ebObject}, '%')
         </if>
@@ -45,9 +54,6 @@
     </select>
 
     <update id="updateExpensebill">
-        <!--UPDATE account
-        SET aBalance=(select aBalance+#{ebAmount} FROM account WHERE aID=#{ebAccountID})
-        WHERE aID=#{ebAccountID};-->
         UPDATE expensebill
         SET ebAccountID = #{ebAccountID},
         ebAmount = #{ebAmount},
@@ -55,7 +61,6 @@
         ebObject= #{ebObject},
         ebTime=#{ebTime}
         WHERE ebID = #{ebID}
-
     </update>
 
     <delete id="deleteExpensebillById">
@@ -64,6 +69,6 @@
 
     <insert id="addExpensebill">
         insert into expensebill (ebID, ebObject, ebTime, ebFinancialID,ebAmount,ebAccountID)
-        value (#{ebID}, #{ebObject},#{ebTime},#{ebFinancialID},#{ebAmount},#{ebAccountID})
+        value (#{ebID}, #{ebObject},#{ebTime},#{ebFinancialID},#{ebAmount},#{ebAccountID});
     </insert>
 </mapper>

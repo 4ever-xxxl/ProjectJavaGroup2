@@ -5,9 +5,13 @@ import lombok.Data;
 
 @Data
 public class CompanyPageRequest extends BaseRequest{
-    @JsonProperty("ebObject")
-    private String ebObject;
-    @JsonProperty("max")
+    @JsonProperty("cSocialCreditCode")
+    private String cSocialCreditCode;
+    @JsonProperty("cID")
+    private long cID;
+    @JsonProperty("cName")
+    private String cName;
+    @JsonProperty("cAddress")
     private String cAddress;
     @JsonProperty("cRegion")
     private String cRegion;
