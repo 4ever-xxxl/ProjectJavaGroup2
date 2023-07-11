@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public interface StaffDao {
     List<Staff> list();
-    Staff getStaff(@Param("companyId")long companyId,@Param("staffId") long staffId);
+    Staff getStaffById(@Param("staffId") long staffId);
     void addCompanyStuff(Staff staff);
     void updateStaff(Staff staff);
     void deleteStaff(long sId);

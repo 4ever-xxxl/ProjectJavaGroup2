@@ -6,12 +6,16 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.example.common.Result;
 import com.example.controller.Request.StaffPageRequest;
 import com.example.entity.Staff;
+import com.example.entity.Staffapplicationrecord;
 import com.example.service.IStaffService;
+import com.example.service.IStaffapplicationrecordService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +25,8 @@ import java.util.Map;
 public class StaffController {
     @Autowired
     private IStaffService staffService;
+    @Autowired
+    private IStaffapplicationrecordService staffapplicationrecordService;
     @GetMapping("/getAllStaff")
     public Result getAllStaff()
     {
@@ -35,29 +41,30 @@ public class StaffController {
     @PostMapping("/addStaff")
     public Result addCompanyStuff(@RequestBody Staff staff)
     {
+
         staffService.addCompanyStuff(staff);
         return Result.success();
     }
-
     @PutMapping("/updateStaff")
     public Result updateStaff(@RequestBody Staff staff)
     {
+        Staff staff1 =staffService.getStaffById(staff.getSId());
+        if(staff1.getSDisabled()=="健康"&&staff.getSDisabled()=="残疾"){
+            staffapplicationrecordService.addSar(new Staffapplicationrecord(0,new Date(),staff.getSId(),null));
+        }
         staffService.updateStaff(staff);
         return Result.success();
     }
-
     @DeleteMapping("/deleteStaff/{sId}")
     public Result deleteStaff(@PathVariable long sId){
         staffService.deleteStaff(sId);
         return Result.success();
     }
-
     @PostMapping("/searchStaff")
     public Result searchStaff(@RequestBody StaffPageRequest staffPageRequest)
     {
         PageHelper.startPage(staffPageRequest.getPageNum(),staffPageRequest.getPageSize());
         List<Staff> staffs=staffService.searchStaff(staffPageRequest);
-       
         return Result.success(new PageInfo<>(staffs));
     }
     @GetMapping("/updateStaffHealth/{id}")
@@ -66,7 +73,6 @@ public class StaffController {
         staffService.updateStaffHealth(id);
         return Result.success();
     }
-
 }
 
 
