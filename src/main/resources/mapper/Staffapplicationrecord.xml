@@ -78,7 +78,7 @@
         <if test="sarPass !=null and sarPass != ''">
             and sarPass = #{sarPass}
         </if>
-        LIMIT #{pageSize} OFFSET #{offset};
+
     </select>
 
     <select id="searchSarCount" resultType="java.lang.Long">

@@ -47,7 +47,15 @@ public class StaffController {
     public Result addCompanyStuff(@RequestBody Staff staff)
     {
         try {
+            if (staff.getSDisabled().equals("残疾")) {
+                staff.setSDisabled("健康");
+            }
+            System.out.println("before add");
+            System.out.println(staff.getSId());
             staffService.addCompanyStuff(staff);
+            System.out.println("after add");
+            System.out.println(staff.getSId());
+            staffapplicationrecordService.addSar(new Staffapplicationrecord(0,new Date(),staff.getSId(),"未处理"));
             return Result.success();
         }
         catch (Exception e)
@@ -60,10 +68,19 @@ public class StaffController {
     {
         try {
             Staff staff1 =staffService.getStaffById(staff.getSId());
-            if(staff1.getSDisabled()=="健康"&&staff.getSDisabled()=="残疾"){
-                staffapplicationrecordService.addSar(new Staffapplicationrecord(0,new Date(),staff.getSId(),null));
+            System.out.println("------------------");
+            System.out.println(staff1.getSDisabled());
+            System.out.println(staff.getSDisabled());
+            System.out.println(staff1.getSDisabled()=="健康"&&staff.getSDisabled()=="残疾");
+            System.out.println("------------------");
+            if(staff1.getSDisabled().equals("健康")&&staff.getSDisabled().equals("残疾")){
+                staffapplicationrecordService.addSar(new Staffapplicationrecord(0,new Date(),staff.getSId(),"未处理"));
             }
+            System.out.println("before update");
+            System.out.println(staff);
             staffService.updateStaff(staff);
+            System.out.println("after update");
+            System.out.println(staff);
             return Result.success();
         }
         catch (Exception e)
@@ -79,6 +96,10 @@ public class StaffController {
             return Result.success();
         }
         catch (Exception e){
+            System.out.println("deleteStaff error");
+            System.out.println(e);
+            System.out.println(e.getMessage());
+            System.out.println("end");
             return Result.error(e.getMessage());
         }
     }

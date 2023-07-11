@@ -1,6 +1,7 @@
 package com.example.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.common.Result;
 import com.example.controller.Request.StaffapplicationrecordPageRequest;
 import com.example.controller.Responce.StaffapplicationrecordResponce;
@@ -40,39 +41,54 @@ public class StaffapplicationrecordController {
 //    }
 
     @PostMapping("/searchStaffapplicationrecord")
-    public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
-        PageHelper.startPage(sarPageRequest.getPageNum(),sarPageRequest.getPageSize());
-        List<Staffapplicationrecord> Sars = sarService.searchSar(sarPageRequest);
-        StaffapplicationrecordResponce res = new StaffapplicationrecordResponce();
-        res.setList(Sars);
-        res.setTotal(sarService.searchSarCount(sarPageRequest));
-        return Result.success(new PageInfo<>(Sars));
+    public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPR){
+        System.out.println("----------");
+        System.out.println(sarPR);
+        System.out.println("----------");
+        PageHelper.startPage(sarPR.getPageNum(),sarPR.getPageSize());
+        return Result.success( new PageInfo<>(sarService.searchSar(sarPR)));
     }
 
     @PostMapping("/addStaffapplicationrecord")
     public Result addSar(@RequestBody Staffapplicationrecord sar){
+        System.out.println(sar.getSarid());
         return Result.success(sarService.addSar(sar));
     }
 
     @PutMapping("/updateStaffapplicationrecord")
     public Result updateSar(@RequestBody Staffapplicationrecord sar){
         try{
+            System.out.println("更新");
+            System.out.println(sar);
             sarService.updateSar(sar);
-            if(sar.getSarpass()=="通过"){
+            if(sar.getSarpass().equals("通过")) {
 //                System.out.println("更新成功");
-                Staffapplicationrecord tmpSar=sarService.getSarByCondition(sar.getSarid(),0L,0L,null,null,null).get(0);
+                Staffapplicationrecord tmpSar = sarService.getSarByCondition(sar.getSarid(), 0L, 0L, null, null, null).get(0);
                 System.out.println(tmpSar.getSarstaffid());
                 staffService.updateStaffHealth(tmpSar.getSarstaffid());
             }
             return Result.success("更新成功");
+
         }catch (Exception e){
             return Result.error("更新失败");
         }
     }
 
-    @GetMapping("/deleteStaffapplicationrecord/{sarID}")
+    @DeleteMapping("/deleteStaffapplicationrecord/{sarID}")
     public Result deleteSar(@PathVariable("sarID") Long sarID){
         return Result.success(sarService.deleteSar(sarID));
     }
+
+    @PostMapping("/getsomething")
+    public Result getsomething(@RequestBody StaffapplicationrecordPageRequest sarPR){
+        System.out.println("----------");
+        System.out.println(sarPR);
+        System.out.println("----------");
+        PageHelper.startPage(sarPR.getPageNum(),sarPR.getPageSize());
+        QueryWrapper<Staffapplicationrecord> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("sar_staff_id",sarPR.getSarStaffID());
+        return Result.success( new PageInfo<>(sarService.searchSar(sarPR)));
+    }
+
 }
 

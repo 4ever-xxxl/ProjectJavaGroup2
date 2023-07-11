@@ -62,8 +62,12 @@
     </delete>
 
     <insert id="addCompanyStuff">
-        insert into staff (sID, sName, sSex, sIdNum, sPhone, sCompanyID, sDisabled, sAddress, sEduBackground, sPosition, sHireDate, sSalary)
-        value (#{sId}, #{sName},#{sSex},#{sIdNum},#{sPhone},#{sCompanyId},#{sDisabled},#{sAddress},#{sEduBackground},#{sPosition},#{sHireDate},#{sSalary})
+        <selectKey resultType="int" order="AFTER" keyProperty="sId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into staff (sName, sSex, sIdNum, sPhone, sCompanyID, sDisabled, sAddress, sEduBackground, sPosition, sHireDate, sSalary)
+        value ( #{sName},#{sSex},#{sIdNum},#{sPhone},#{sCompanyId},#{sDisabled},#{sAddress},#{sEduBackground},#{sPosition},#{sHireDate},#{sSalary})
     </insert>
+
 
 </mapper>

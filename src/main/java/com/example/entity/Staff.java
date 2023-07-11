@@ -166,4 +166,23 @@ public class Staff {
     this.sSalary = sSalary;
   }
 
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "sId=" + sId +
+                ", sName='" + sName + '\'' +
+                ", sSex='" + sSex + '\'' +
+                ", sIdNum='" + sIdNum + '\'' +
+                ", sPhone='" + sPhone + '\'' +
+                ", sCompanyId=" + sCompanyId +
+                ", sDisabled='" + sDisabled + '\'' +
+                ", sAddress='" + sAddress + '\'' +
+                ", sEduBackground='" + sEduBackground + '\'' +
+                ", sPosition='" + sPosition + '\'' +
+                ", sHireDate=" + sHireDate +
+                ", sSalary=" + sSalary +
+                '}';
+    }
+
 }

@@ -62,6 +62,9 @@ public class WithheldbillController {
 
     @PostMapping("/searchWithheldbill")
     public Result searchWithheldbill(@RequestBody WithheldbillPageRequest withheldbillPageRequest){
+        System.out.println("----------");
+        System.out.println(withheldbillPageRequest);
+        System.out.println("----------");
         PageHelper.startPage(withheldbillPageRequest.getPageNum(),withheldbillPageRequest.getPageSize());
         QueryWrapper<Withheldbill> queryWrapper=new QueryWrapper<>();
         if (withheldbillPageRequest.getMin_wbamount() != null && withheldbillPageRequest.getMax_wbamount() != null) {
@@ -71,7 +74,7 @@ public class WithheldbillController {
         } else if (withheldbillPageRequest.getMax_wbamount() != null) {
             queryWrapper.le("wbamount", withheldbillPageRequest.getMax_wbamount());
         }
-        queryWrapper.eq("wbFinancialID",withheldbillPageRequest.getWbFinancialID());
+        if (withheldbillPageRequest.getWbFinancialID() != null) queryWrapper.eq("wbFinancialID",withheldbillPageRequest.getWbFinancialID());
         //生成新的分页信息
         List<Withheldbill> withheldbills=withheldbillDao.selectList(queryWrapper);
         return Result.success(new PageInfo<>(withheldbills));
