@@ -33,6 +33,7 @@
             and sAddress like CONCAT('%', #{address}, '%')
         </if>
     </select>
+    <select id="getStaff" resultType="com.example.entity.Staff"></select>
 
 
     <update id="updateStaff">

@@ -5,7 +5,7 @@ import com.example.entity.Staff;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import com.example.controller.Request.BaseRequest;
+
 import java.util.List;
 
 @Repository
