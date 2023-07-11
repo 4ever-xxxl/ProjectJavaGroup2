@@ -1,6 +1,7 @@
 package com.example.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.common.Result;
 import com.example.controller.Request.StaffapplicationrecordPageRequest;
 import com.example.controller.Responce.StaffapplicationrecordResponce;
@@ -28,26 +29,37 @@ public class StaffapplicationrecordController {
     @Autowired
     IStaffService staffService;
 
-//    @PostMapping("/searchStaffapplicationrecord")
-//    public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
-//        Long sarID = sarPageRequest.getSarID();
-//        Long sID = sarPageRequest.getSarStaffID();
-//        Long cID = sarPageRequest.getSarCompanyID();
-//        Date startTime = sarPageRequest.getStartTime();
-//        Date endTime = sarPageRequest.getEndTime();
-//        String sarPass = sarPageRequest.getSarPass();
-//        return Result.success(sarService.getSarByCondition(sarID,sID,cID,startTime,endTime,sarPass));
-//    }
+    @Autowired
+    StaffapplicationrecordDao sarDao;
 
     @PostMapping("/searchStaffapplicationrecord")
-    public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
+    public Result searchSar(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
         PageHelper.startPage(sarPageRequest.getPageNum(),sarPageRequest.getPageSize());
-        List<Staffapplicationrecord> Sars = sarService.searchSar(sarPageRequest);
-        StaffapplicationrecordResponce res = new StaffapplicationrecordResponce();
-        res.setList(Sars);
-        res.setTotal(sarService.searchSarCount(sarPageRequest));
+        if(sarPageRequest.getSarID() != null) {
+            sarService.getSarByCondition(sarPageRequest.getSarID(),0L,0L,null,null,null).get(0);
+            return Result.success(sarService.getSarByCondition(sarPageRequest.getSarID(),0L,0L,null,null,null).get(0));
+        }
+        QueryWrapper<Staffapplicationrecord> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(sarPageRequest.getSarStaffID()!=null,"sarstaffid",sarPageRequest.getSarStaffID())
+                .eq(sarPageRequest.getSarStaffID()!=null,"sarstaffid",sarPageRequest.getSarStaffID())
+                .inSql(sarPageRequest.getSarCompanyID()!=null,"sarcompanyid","select sCompanyID from staffapplicationrecord left join staff on staff.sID=staffapplicationrecord.sarstaffid where staff.sCompanyID="+sarPageRequest.getSarCompanyID())
+                .le(sarPageRequest.getStartTime()!=null,"starttime",sarPageRequest.getStartTime())
+                .ge(sarPageRequest.getEndTime()!=null,"endtime",sarPageRequest.getEndTime())
+                .eq(sarPageRequest.getSarPass()!=null,"sarpass",sarPageRequest.getSarPass());
+
+        List<Staffapplicationrecord> Sars = sarDao.selectList(queryWrapper);
         return Result.success(new PageInfo<>(Sars));
     }
+
+//    @PostMapping("/searchStaffapplicationrecord")
+//    public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
+//        PageHelper.startPage(sarPageRequest.getPageNum(),sarPageRequest.getPageSize());
+//        List<Staffapplicationrecord> Sars = sarService.searchSar(sarPageRequest);
+//        StaffapplicationrecordResponce res = new StaffapplicationrecordResponce();
+//        res.setList(Sars);
+//        res.setTotal(sarService.searchSarCount(sarPageRequest));
+//        return Result.success(new PageInfo<>(Sars));
+//    }
 
     @PostMapping("/addStaffapplicationrecord")
     public Result addSar(@RequestBody Staffapplicationrecord sar){

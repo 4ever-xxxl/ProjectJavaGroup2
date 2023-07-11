@@ -10,9 +10,9 @@ public class StaffapplicationrecordPageRequest extends BaseRequest {
     @JsonProperty("sarID")
     private Long sarID;
     @JsonProperty("sarStaffID")
-    private long sarStaffID;
+    private Long sarStaffID;
     @JsonProperty("sarCompanyID")
-    private long sarCompanyID;
+    private Long sarCompanyID;
     @JsonProperty("startTime")
     private Date startTime;
     @JsonProperty("endTime")
