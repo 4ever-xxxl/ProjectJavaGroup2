@@ -3,7 +3,6 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.controller.Request.CompanyPageRequest;
-import com.example.controller.Response.CompanyResponse;
 import com.example.dao.CompanyDao;
 import com.example.entity.Company;
 
@@ -62,10 +61,6 @@ public class CompanyController {
     {
         PageHelper.startPage(companypagerequest.getPageNum(),companypagerequest.getPageSize());
         List<Company> companies=companyservice.searchCompany(companypagerequest);
-        PageInfo<Company> pageInfo=new PageInfo<>(companies);
-        List<Company> company=pageInfo.getList();
-        CompanyResponse companyresponse =new CompanyResponse("company",company);
-        companyresponse.setTotal(pageInfo.getTotal());
-        return Result.success(companyresponse);
+        return Result.success(new PageInfo<>(companies));
     }
 }

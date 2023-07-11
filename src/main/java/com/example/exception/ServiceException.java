@@ -1,10 +1,12 @@
 package com.example.exception;
 
+import cn.hutool.http.HttpStatus;
+
 public class ServiceException extends RuntimeException{
 
-    private String code;
+    private int code;
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
@@ -16,7 +18,7 @@ public class ServiceException extends RuntimeException{
         super(message);
     }
 
-    public ServiceException(String code, String message) {
+    public ServiceException(int code, String message) {
         super(message);
         this.code = code;
     }

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class JwtInterceptor implements HandlerInterceptor {
 
-    private static final String ERROR_CODE_401 = "401";
+    private static final int ERROR_CODE_401 = 401;
 
     private final IUserService userService;
     @Autowired

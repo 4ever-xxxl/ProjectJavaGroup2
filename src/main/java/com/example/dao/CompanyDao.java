@@ -15,4 +15,5 @@ public interface CompanyDao {
     Integer updateCompany(Company company);
 
     List<Company> searchCompany(CompanyPageRequest companypagerequest);
+
 }

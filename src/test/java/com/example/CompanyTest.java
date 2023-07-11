@@ -11,9 +11,9 @@ import javax.annotation.Resource;
 
 
 /**
- * 方法阅读说明:CompanyDao是基础SQL语句到接口方法的映射，sql语句写在Company.xml文件中
- * ICompanyService是对Dao中接口的进一步封装（依然是接口），涉及到增删改三个方法，主要作用是将Dao中方法的Integer返回值类型封装为为Result,并且对Dao中sql语句返回的异常进行捕捉与处理
- * CompanyService是对ICompanyService中接口的实现
+ * 方法阅读说明:Dao是基础SQL语句到接口方法的映射，sql语句写在（表名）.xml文件中
+ * I{表名}Service是对Dao中接口的进一步封装（依然是接口），涉及到增删改三个方法，主要作用是将Dao中方法的Integer返回值类型封装为为Result,并且对Dao中sql语句返回的异常进行捕捉与处理
+ * {表名}Service是对I{表名}Service中接口的实现
  * Controller中对于查询直接使用了Dao接口中的方法，对于增删改使用了封装后的Service方法
  *
  */

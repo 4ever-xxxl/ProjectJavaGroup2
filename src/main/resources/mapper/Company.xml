@@ -20,13 +20,13 @@
         SELECT *
         FROM company
         WHERE 1=1
-       <!-- <if test="name != null and name != ''">
+       <!-- <if test="cName != null and cName != ''">
             AND cName like concat('%', #{cName}, '%')
         </if>
-        <if test="maxSalary != 0">
+        <if test="cAddress != null" and cAddress !=''>
             AND cAddress like concat('%', #{cAddress}, '%')
         </if>
-        <if test="disabled != null">
+        <if test="cRegion != null" and cRegion !=''>
             AND cRegion like concat('%', #{cRegion}, '%')
         </if>-->
     </select>
