@@ -2,10 +2,8 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.common.Result;
-import com.example.controller.Request.AccountPageRequest;
 import com.example.controller.Request.WithheldbillPageRequest;
 import com.example.dao.WithheldbillDao;
-import com.example.entity.Account;
 import com.example.entity.Withheldbill;
 import com.example.service.Imp.WithheldbillService;
 import com.github.pagehelper.PageHelper;
@@ -73,11 +71,8 @@ public class WithheldbillController {
         } else if (withheldbillPageRequest.getMax_wbamount() != null) {
             queryWrapper.le("wbamount", withheldbillPageRequest.getMax_wbamount());
         }
-
         //生成新的分页信息
         List<Withheldbill> withheldbills=withheldbillDao.selectList(queryWrapper);
         return Result.success(new PageInfo<>(withheldbills));
     }
-
-
 }
