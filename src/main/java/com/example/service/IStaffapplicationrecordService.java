@@ -24,4 +24,6 @@ public interface IStaffapplicationrecordService{
     int updateSar(Staffapplicationrecord sar);
 
     int deleteSar(long sarID);
+
+    Long searchSarCount(StaffapplicationrecordPageRequest SarPR);
 }
