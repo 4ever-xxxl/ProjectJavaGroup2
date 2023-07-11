@@ -53,6 +53,11 @@ public class StaffapplicationrecordService implements IStaffapplicationrecordSer
     public List<Staffapplicationrecord> searchSar(StaffapplicationrecordPageRequest SarPR) {
         return sarDao.searchSar(SarPR);
     }
+
+    @Override
+    public Long searchSarCount(StaffapplicationrecordPageRequest SarPR) {
+        return sarDao.searchSarCount(SarPR);
+    }
 }
 
 
