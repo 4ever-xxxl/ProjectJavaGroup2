@@ -6,7 +6,6 @@ import com.example.entity.Staff;
 import java.util.List;
 public interface IStaffService {
     List<Staff> list();
-    Staff getStaff(long companyId,long stuffId);
     void addCompanyStuff(Staff staff);
     void updateStaff(Staff staff);
     void deleteStaff(long sId);

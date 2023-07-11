@@ -21,10 +21,6 @@ public class StaffService implements IStaffService {
         return staffDao.list();
     }
     @Override
-    public Staff getStaff(long companyId,long stuffId)   {
-        return staffDao.getStaff(companyId,stuffId);
-    }
-    @Override
     public void addCompanyStuff(Staff staff){
         staffDao.addCompanyStuff(staff);
     }

@@ -38,20 +38,17 @@ public class StaffController {
         staffService.addCompanyStuff(staff);
         return Result.success();
     }
-
     @PutMapping("/updateStaff")
     public Result updateStaff(@RequestBody Staff staff)
     {
         staffService.updateStaff(staff);
         return Result.success();
     }
-
     @DeleteMapping("/deleteStaff/{sId}")
     public Result deleteStaff(@PathVariable long sId){
         staffService.deleteStaff(sId);
         return Result.success();
     }
-
     @PostMapping("/searchStaff")
     public Result searchStaff(@RequestBody StaffPageRequest staffPageRequest)
     {
