@@ -7,7 +7,12 @@ import java.util.Date;
 
 @Data
 public class ExpensebillPageRequest extends BaseRequest{
-
+    @JsonProperty("ebID")
+    private long ebID;
+    @JsonProperty("ebAccountID")
+    private long ebAccountID;
+    @JsonProperty("ebFinancialID")
+    private long ebFinancialID;
     @JsonProperty("ebObject")
     private String ebObject;
     @JsonProperty("maxAmount")

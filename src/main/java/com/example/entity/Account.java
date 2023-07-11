@@ -36,6 +36,16 @@ public class Account implements Serializable {
      * 最近更新时间
      */
     private Date alastupdate;
+    public Account(){
+    }
+
+    public Account(long aid,String abankcard,BigDecimal abalance){
+        this.aid=aid;
+        this.abankcard=abankcard;
+        this.abalance=abalance;
+        this.alastupdate=new Date();
+    }
+
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

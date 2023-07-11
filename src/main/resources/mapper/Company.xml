@@ -20,15 +20,21 @@
         SELECT *
         FROM company
         WHERE 1=1
-       <!-- <if test="cName != null and cName != ''">
+        <if test="cID != null and cID != ''">
+            AND cID =#{cID}
+        </if>
+        <if test="cSocialCreditCode != null and cSocialCreditCode != ''">
+            AND cSocialCreditCode =#{cSocialCreditCode}
+        </if>
+       <if test="cName != null and cName != ''">
             AND cName like concat('%', #{cName}, '%')
         </if>
-        <if test="cAddress != null" and cAddress !=''>
+        <if test="cAddress != null and cAddress !=''">
             AND cAddress like concat('%', #{cAddress}, '%')
         </if>
-        <if test="cRegion != null" and cRegion !=''>
+        <if test="cRegion != null and cRegion !=''">
             AND cRegion like concat('%', #{cRegion}, '%')
-        </if>-->
+        </if>
     </select>
 
     <update id="updateCompany">
