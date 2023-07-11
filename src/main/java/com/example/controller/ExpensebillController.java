@@ -53,7 +53,7 @@ public class ExpensebillController {
         return Result.success(expensebillservice.updateExpensebill(expensebill));
     }
 
-    @DeleteMapping("/deleteExpensebillById/{ebID}")
+    @DeleteMapping("/deleteExpensebill/{ebID}")
     public Result deleteExpensebill(@PathVariable long ebID){
         return  Result.success(expensebillservice.deleteExpensebillById(ebID));
     }
