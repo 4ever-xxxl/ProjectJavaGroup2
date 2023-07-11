@@ -8,11 +8,14 @@ import com.example.entity.Staffapplicationrecord;
 import com.example.service.IStaffService;
 import com.example.service.IStaffapplicationrecordService;
 import com.example.service.Imp.StaffapplicationrecordService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/Staffapplicationrecord")
@@ -24,15 +27,22 @@ public class StaffapplicationrecordController {
     @Autowired
     IStaffService staffService;
 
+//    @PostMapping("/searchStaffapplicationrecord")
+//    public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
+//        Long sarID = sarPageRequest.getSarID();
+//        Long sID = sarPageRequest.getSarStaffID();
+//        Long cID = sarPageRequest.getSarCompanyID();
+//        Date startTime = sarPageRequest.getStartTime();
+//        Date endTime = sarPageRequest.getEndTime();
+//        String sarPass = sarPageRequest.getSarPass();
+//        return Result.success(sarService.getSarByCondition(sarID,sID,cID,startTime,endTime,sarPass));
+//    }
+
     @PostMapping("/searchStaffapplicationrecord")
     public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
-        Long sarID = sarPageRequest.getSarID();
-        Long sID = sarPageRequest.getSarStaffID();
-        Long cID = sarPageRequest.getSarCompanyID();
-        Date startTime = sarPageRequest.getStartTime();
-        Date endTime = sarPageRequest.getEndTime();
-        String sarPass = sarPageRequest.getSarPass();
-        return Result.success(sarService.getSarByCondition(sarID,sID,cID,startTime,endTime,sarPass));
+        PageHelper.startPage(sarPageRequest.getPageNum(),sarPageRequest.getPageSize());
+        List<Staffapplicationrecord> Sars = sarService.searchSar(sarPageRequest);
+        return Result.success(new PageInfo<>(Sars));
     }
 
     @PostMapping("/addStaffapplicationrecord")

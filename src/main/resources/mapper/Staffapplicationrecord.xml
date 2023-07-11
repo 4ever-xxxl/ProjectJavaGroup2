@@ -49,6 +49,37 @@
 
     </select>
 
+    <select id="searchSar" resultType="com.example.entity.Staffapplicationrecord">
+        select * from staffapplicationrecord
+        <if test="cID != 0">
+            left join staff on staffapplicationrecord.sarStaffID = staff.sID
+        </if>
+        where 1 = 1
+        <if test="cID != 0">
+            and sCompanyID = #{cID}
+        </if>
+
+        <if test="sarID != 0">
+            and sarID = #{sarID}
+        </if>
+
+        <if test="sID != 0">
+            and sarStaffID = #{sID}
+        </if>
+
+        <if test="startTime != null">
+            and sartime &gt;= #{startTime}
+        </if>
+
+        <if test="endTime != null">
+            and sartime &lt;= #{endTime}
+        </if>
+
+        <if test="status !=null and status != ''">
+            and sarPass = #{status}
+        </if>
+    </select>
+
     <!--新增申请记录-->
     <insert id="addSar">
         insert into staffapplicationrecord
