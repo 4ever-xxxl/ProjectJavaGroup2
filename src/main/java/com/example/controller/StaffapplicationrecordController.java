@@ -3,6 +3,7 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.controller.Request.StaffapplicationrecordPageRequest;
+import com.example.controller.Responce.StaffapplicationrecordResponce;
 import com.example.dao.StaffapplicationrecordDao;
 import com.example.entity.Staffapplicationrecord;
 import com.example.service.IStaffService;
@@ -42,6 +43,9 @@ public class StaffapplicationrecordController {
     public Result getSarByCondition(@RequestBody StaffapplicationrecordPageRequest sarPageRequest){
         PageHelper.startPage(sarPageRequest.getPageNum(),sarPageRequest.getPageSize());
         List<Staffapplicationrecord> Sars = sarService.searchSar(sarPageRequest);
+        StaffapplicationrecordResponce res = new StaffapplicationrecordResponce();
+        res.setList(Sars);
+        res.setTotal(sarService.searchSarCount(sarPageRequest));
         return Result.success(new PageInfo<>(Sars));
     }
 
@@ -55,7 +59,7 @@ public class StaffapplicationrecordController {
         try{
             sarService.updateSar(sar);
             if(sar.getSarpass()=="通过"){
-                System.out.println("更新成功");
+//                System.out.println("更新成功");
                 Staffapplicationrecord tmpSar=sarService.getSarByCondition(sar.getSarid(),0L,0L,null,null,null).get(0);
                 System.out.println(tmpSar.getSarstaffid());
                 staffService.updateStaffHealth(tmpSar.getSarstaffid());

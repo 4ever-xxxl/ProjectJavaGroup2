@@ -60,6 +60,8 @@ public interface StaffapplicationrecordDao extends BaseMapper<Staffapplicationre
 
     List<Staffapplicationrecord> searchSar(StaffapplicationrecordPageRequest SarPR);
 
+    Long searchSarCount(StaffapplicationrecordPageRequest SarPR);
+
 }
 
 
