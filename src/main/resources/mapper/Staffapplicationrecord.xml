@@ -58,8 +58,7 @@
         <if test="sarCompanyID != 0">
             and sCompanyID = #{sarCompanyID}
         </if>
-
-        <if test="sarID != 0">
+        <if test="sarID!=null and sarID != 0">
             and sarID = #{sarID}
         </if>
 
